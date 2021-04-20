@@ -1,5 +1,5 @@
 package Program;
 
-public class Instruction {
+public abstract class Instruction {
 
 }

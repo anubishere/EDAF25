@@ -1,5 +1,5 @@
 package Program;
 
-public class BinaryExpr {
+public interface BinaryExpr {
 
 }

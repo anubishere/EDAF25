@@ -1,5 +1,5 @@
 package Computer;
 
-public class Word {
+public abstract class Word {
 
 }

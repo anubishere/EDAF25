@@ -1,5 +1,5 @@
 package Computer;
 
-public class Memory {
+public abstract class Memory {
 
 }
