@@ -9,7 +9,7 @@ public abstract class Memory {
 		this.memory = new Word[length];
 	}
 	
-	public Word read(Address a) {
+	public Word getWord(Address a) {
 		return this.memory[a.getIndex()];
 	}
 
