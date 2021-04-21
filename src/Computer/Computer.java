@@ -16,7 +16,7 @@ public class Computer {
     }
     public void run(){
         while(pc.getPC() >= 0){
-            program.get(pc.getPC()).Execute(memory, pc);
+            program.get(pc.getPC()).execute(memory, pc);
         }
     }
 }

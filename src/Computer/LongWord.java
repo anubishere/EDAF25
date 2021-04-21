@@ -1,6 +1,6 @@
 package Computer;
 
-public class LongWord extends Word{
+public class LongWord implements Word{
     private long word;
 
     public LongWord(long word){
@@ -36,5 +36,16 @@ public class LongWord extends Word{
     public long getWord() {
         return word;
     }
+
+	@Override
+	public void setValue(Word newWord) {
+		this.word = newWord.getWord();
+		
+	}
+
+	@Override
+	public Word readOperand(Memory mem) {
+		return this;
+	}
 
 }

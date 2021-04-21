@@ -3,7 +3,7 @@ package Computer;
 import Program.Address;
 
 public abstract class Memory {
-	private Word[] memory;
+	protected Word[] memory;
 	
 	public Memory(int length) {
 		this.memory = new Word[length];

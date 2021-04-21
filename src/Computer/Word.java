@@ -1,8 +1,9 @@
 package Computer;
 
-public abstract class Word {
+import Program.Operand;
+
+public interface Word extends Operand {
 	
-	public abstract int getValue(Word w);
 	
 	public abstract void setValue(Word newWord);
 	

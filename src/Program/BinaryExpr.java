@@ -8,10 +8,10 @@ public abstract class BinaryExpr extends Instruction  {
 	
 	protected Operand o1;
 	protected Operand o2;
-	protected Address address;
+	protected Operand address;
 	
 	
-	protected BinaryExpr(Operand o1, Operand o2, Address address) {
+	protected BinaryExpr(Operand o1, Operand o2, Operand address) {
 		this.o1 = o1;
 		this.o2 = o2;
 		this.address = address;
