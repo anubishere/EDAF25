@@ -21,5 +21,9 @@ public abstract class Word extends Memory {
 	public abstract void add(Word w1, Word w2);
 	
 	public abstract void Mul(Word w);
+	
+	public int readOperand(Memory m) {
+		return m[0];
+	}
 
 }

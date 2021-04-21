@@ -1,5 +1,6 @@
 package Program;
 
+import Computer.Memory;
 import Computer.Word;
 
 public abstract class BinaryExpr extends Instruction  {
@@ -18,6 +19,10 @@ public abstract class BinaryExpr extends Instruction  {
 	
 	
 	protected abstract Word compute(Word o1, Word o2);
+	
+	public int run() {
+		
+	}
 	
 
 }
