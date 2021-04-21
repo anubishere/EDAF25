@@ -1,24 +1,15 @@
 package Program;
 
 import Computer.Memory;
+import Computer.PC;
 import Computer.Word;
 
 public abstract class Instruction {
 	
-	public Instruction() {
-		
-	}
 	
-	
-	
-	public String toString() {
-		return null;
-		
-	}
-	
-	public abstract void Execute(Memory mem);
+	public abstract void Execute(Memory mem, PC pc);
 	
 
-	
+	public abstract String toString();
 
 }
