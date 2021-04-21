@@ -3,7 +3,7 @@ package Program;
 import Computer.Memory;
 import Computer.PC;
 
-public class JumpEq extends Instruction {
+public class JumpEq implements Instruction {
 
 	private final String opName;
 	private int dest;

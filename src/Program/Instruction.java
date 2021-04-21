@@ -5,6 +5,6 @@ import Computer.PC;
 
 public interface Instruction {
 	
-	public abstract void execute(Memory mem, PC pc);
-	public abstract String toString();
+	public void execute(Memory mem, PC pc);
+	public String toString();
 }

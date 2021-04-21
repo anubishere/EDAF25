@@ -3,7 +3,7 @@ package Program;
 import Computer.Memory;
 import Computer.PC;
 
-public class Print extends Instruction {
+public class Print implements Instruction {
 	
 	private String opName;
 	private Operand op;

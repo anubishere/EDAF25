@@ -3,7 +3,7 @@ package Program;
 import Computer.Memory;
 import Computer.PC;
 
-public class Jump extends Instruction {
+public class Jump implements Instruction {
 	
 	private final String opName;
 	private int dest;

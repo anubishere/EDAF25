@@ -14,7 +14,6 @@ public abstract class BinaryExpr implements Instruction  {
 		this.o1 = o1;
 		this.o2 = o2;
 		this.address = address;
-		
 	}
 	
 	protected abstract Word compute(Word o1, Word o2);
@@ -24,10 +23,14 @@ public abstract class BinaryExpr implements Instruction  {
 	 */
 	@Override
 	public void execute(Memory mem, PC pc) {
-		
 		Word result = compute(o1.readOperand(mem), o2.readOperand(mem));
 		Word wordOnAddress = address.readOperand(mem);
-		wordOnAddress.setValue(result);
+		wordOnAddress.setWordValue(result);
 		pc.setPC(pc.getPC() + 1);
 	}
+	
+	public String toString(){
+		return "";
+	}
+
 }

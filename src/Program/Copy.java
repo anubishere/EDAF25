@@ -3,7 +3,7 @@ package Program;
 import Computer.Memory;
 import Computer.PC;
 
-public class Copy extends Instruction {
+public class Copy implements Instruction {
 
 	private final String opName;
 	private Operand op;
