@@ -7,9 +7,12 @@ import Computer.Word;
 public abstract class Instruction {
 	
 	
-	public abstract void Execute(Memory mem, PC pc);
-	
-
 	public abstract String toString();
+
+
+	public abstract void execute(Memory mem, PC pc);
+
+
+	
 
 }
