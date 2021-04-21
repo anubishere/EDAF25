@@ -4,12 +4,11 @@ import Computer.Memory;
 import Computer.PC;
 import Computer.Word;
 
-public abstract class BinaryExpr extends Instruction  {
+public abstract class BinaryExpr implements Instruction  {
 	
 	protected Operand o1;
 	protected Operand o2;
 	protected Operand address;
-	
 	
 	protected BinaryExpr(Operand o1, Operand o2, Operand address) {
 		this.o1 = o1;
@@ -27,14 +26,8 @@ public abstract class BinaryExpr extends Instruction  {
 	public void execute(Memory mem, PC pc) {
 		
 		Word result = compute(o1.readOperand(mem), o2.readOperand(mem));
-		
 		Word wordOnAddress = address.readOperand(mem);
-		
 		wordOnAddress.setValue(result);
-		
 		pc.setPC(pc.getPC() + 1);
-		
 	}
-	
-
 }
