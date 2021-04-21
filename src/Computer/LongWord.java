@@ -23,12 +23,18 @@ public class LongWord extends Word{
     }
 
     @Override
+    public Word copy() {
+        return new LongWord(word);
+    }
+
+    @Override
     public String toString() {
-        return null;
+        return Long.toString(word);
     }
 
     @Override
     public long getWord() {
         return word;
     }
+
 }
