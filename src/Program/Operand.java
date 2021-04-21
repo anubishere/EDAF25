@@ -1,5 +1,5 @@
 package Program;
 
-public abstract class Operand {
-
+public interface Operand {
+	
 }
