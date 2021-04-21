@@ -19,7 +19,7 @@ public class LongWord implements Word{
 
     @Override
     public boolean eq(Word w) {
-        return this.word == w1.getWordValue();
+        return this.word == w.getWordValue();
     }
 
     @Override
