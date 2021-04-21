@@ -9,8 +9,8 @@ public class Copy implements Instruction {
 	private Operand op;
 	private Address address;
 
-	public Copy(String opName, Operand op, Address address) {
-		this.opName = opName;
+	public Copy(Operand op, Address address) {
+		this.opName = "CPY";
 		this.op = op;
 		this.address = address;
 	}

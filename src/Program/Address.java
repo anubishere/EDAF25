@@ -18,5 +18,10 @@ public class Address implements Operand{
 	public Word readOperand(Memory mem) {
 		return mem.getWord(this);
 	}
+
+	@Override
+	public String toString(){
+		return "[" + index + "]"
+	}
 	
 }
