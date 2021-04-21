@@ -19,7 +19,7 @@ public class JumpEq extends Instruction {
 	}
 
 	@Override
-	public void Execute(Memory mem, PC pc) {
+	public void execute(Memory mem, PC pc) {
 		if(op1.readOperand(mem).equals(op2.readOperand(mem))) {
 			pc.setPC(pc.getPC() + dest);
 		}
