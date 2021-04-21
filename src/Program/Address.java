@@ -15,7 +15,7 @@ public class Address implements Operand{
 	}
 	
 	public Word getWord(Memory mem) {
-		return mem.read(this);
+		return mem.getWord(this);
 	}
 	
 	
