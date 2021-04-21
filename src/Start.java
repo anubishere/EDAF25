@@ -9,5 +9,6 @@ public class Start {
         Computer computer = new Computer(new LongMemory(1024));
         computer.load(factorial);
         computer.run();
+        
     }
 }
