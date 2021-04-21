@@ -12,5 +12,9 @@ public abstract class Memory {
 	public Word getWord(Address a) {
 		return this.memory[a.getIndex()];
 	}
+	
+	public void setWord(Word input, Address address) {
+		this.memory[address.getIndex()] = input;
+	}
 
 }
