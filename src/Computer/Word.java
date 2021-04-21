@@ -18,8 +18,6 @@ public abstract class Word {
 
 	public abstract long getWord();
 	
-	public int readOperand(Memory m) {
-		return m[0];
-	}
+
 
 }

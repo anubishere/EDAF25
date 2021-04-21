@@ -16,7 +16,7 @@ public class Copy extends Instruction {
 	}
 
 	@Override
-	public void Execute(Memory mem, PC pc) {
+	public void execute(Memory mem, PC pc) {
 		mem.setWord(op.readOperand(mem), address);
 		pc.setPC(pc.getPC() + 1);
 
