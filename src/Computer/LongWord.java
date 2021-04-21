@@ -9,17 +9,17 @@ public class LongWord implements Word{
 
     @Override
     public Word add(Word w) {
-        return new LongWord((w).getWord() + this.word);
+        return new LongWord((w).getWordValue() + this.word);
     }
 
     @Override
     public Word mul(Word w) {
-        return new LongWord((w).getWord() * this.word);
+        return new LongWord((w).getWordValue() * this.word);
     }
 
     @Override
-    public boolean eq(Word w1) {
-        return this.word == w1.getWord();
+    public boolean eq(Word w) {
+        return this.word == w1.getWordValue();
     }
 
     @Override
@@ -33,13 +33,13 @@ public class LongWord implements Word{
     }
 
     @Override
-    public long getWord() {
+    public long getWordValue() {
         return word;
     }
 
 	@Override
-	public void setValue(Word newWord) {
-		this.word = newWord.getWord();
+	public void setWordValue(Word value) {
+		this.word = value.getWordValue();
 		
 	}
 
