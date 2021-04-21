@@ -16,11 +16,13 @@ public abstract class Word extends Memory {
 	
 	public abstract String toString();
 	
-	public abstract boolean eq(Word w1);
+	public abstract boolean eq(Word w);
 	
-	public abstract void add(Word w1, Word w2);
+	public abstract Word add(Word w);
 	
-	public abstract void mul(Word w);
+	public abstract Word mul(Word w);
+
+	public abstract long getWord();
 	
 	public int readOperand(Memory m) {
 		return m[0];

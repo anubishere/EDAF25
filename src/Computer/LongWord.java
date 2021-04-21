@@ -8,26 +8,27 @@ public class LongWord extends Word{
     }
 
     @Override
-    public void add(Word w1, Word w2) {
-        // TODO Auto-generated method stub
-        
+    public Word add(Word w) {
+        return new LongWord((w).getWord() + this.word);
     }
 
     @Override
-    public void mul(Word w) {
-        // TODO Auto-generated method stub
-        
+    public Word mul(Word w) {
+        return new LongWord((w).getWord() * this.word);
     }
 
     @Override
     public boolean eq(Word w1) {
-        // TODO Auto-generated method stub
-        return false;
+        return this.word == w1.getWord();
     }
 
     @Override
     public String toString() {
-        // TODO Auto-generated method stub
         return null;
+    }
+
+    @Override
+    public long getWord() {
+        return word;
     }
 }
