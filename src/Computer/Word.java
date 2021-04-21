@@ -14,12 +14,12 @@ public abstract class Word extends Memory {
 		return m.getWord();
 	}
 	
-	public void add(Word w) {
-		
-	}
+	public abstract String toString();
 	
-	public void Mul(Word w) {
-		
-	}
+	public abstract boolean eq(Word w1);
+	
+	public abstract void add(Word w1, Word w2);
+	
+	public abstract void Mul(Word w);
 
 }
