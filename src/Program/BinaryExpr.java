@@ -9,11 +9,13 @@ public abstract class BinaryExpr implements Instruction  {
 	protected Operand o1;
 	protected Operand o2;
 	protected Operand address;
+	private final String opname;
 	
-	protected BinaryExpr(Operand o1, Operand o2, Operand address) {
+	protected BinaryExpr(Operand o1, Operand o2, Operand address, String opname) {
 		this.o1 = o1;
 		this.o2 = o2;
 		this.address = address;
+		this.opname = opname;
 	}
 	
 	protected abstract Word compute(Word o1, Word o2);
