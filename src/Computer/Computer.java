@@ -6,6 +6,7 @@ public class Computer {
 
     private Memory memory;
     private Program program;
+    private PC pc;
 
 	public Computer(Memory memory) {
         this.memory = memory;
@@ -14,6 +15,8 @@ public class Computer {
         this.program = program;
     }
     public void run(){
-        
+        while(pc.getPC() >= 0){
+            program.get(pc.getPC()).Execute(memory, pc);
+        }
     }
 }
