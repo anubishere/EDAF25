@@ -13,10 +13,10 @@ public class Address implements Operand{
 	public int getIndex() {
 		return this.index;
 	}
-	
-	public Word getWord(Memory mem) {
+
+	@Override
+	public Word readOperand(Memory mem) {
 		return mem.getWord(this);
 	}
-	
 	
 }
