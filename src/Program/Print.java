@@ -10,7 +10,6 @@ public class Print implements Instruction {
 	
 	public Print(Operand op) {
 		this.op = op;
-		
 	}
 	
 	@Override

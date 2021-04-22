@@ -19,7 +19,6 @@ public abstract class Program extends ArrayList<Instruction>{
 			sb.append(i + ": " + inst.toString() + "\n");
 			i++;
 		}
-		sb.append("\n");
 		return sb.toString();
 	}
 

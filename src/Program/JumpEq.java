@@ -19,8 +19,10 @@ public class JumpEq implements Instruction {
 
 	@Override
 	public void execute(Memory mem, PC pc) {
-		if(op1.readOperand(mem).equals(op2.readOperand(mem))) {
-			pc.setPC(pc.getPC() + dest);
+		if(op1.readOperand(mem).eq(op2.readOperand(mem))) {
+			pc.setPC(dest);
+		} else {
+			pc.setPC(pc.getPC() + 1);
 		}
 
 	}
