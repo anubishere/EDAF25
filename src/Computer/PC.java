@@ -15,5 +15,9 @@ public class PC {
 	public void setPC(int next) {
 		programCounter = next;
 	}
+	
+	public void incrementPC() {
+		programCounter++;
+	}
 
 }

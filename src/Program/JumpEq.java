@@ -14,7 +14,6 @@ public class JumpEq implements Instruction {
 		this.dest = dest;
 		this.op1 = op1;
 		this.op2 = op2;
-
 	}
 
 	@Override
@@ -22,9 +21,8 @@ public class JumpEq implements Instruction {
 		if(op1.readOperand(mem).eq(op2.readOperand(mem))) {
 			pc.setPC(dest);
 		} else {
-			pc.setPC(pc.getPC() + 1);
+			pc.incrementPC();
 		}
-
 	}
 
 	@Override

@@ -28,11 +28,10 @@ public abstract class BinaryExpr implements Instruction  {
 		Word result = compute(o1.readOperand(mem), o2.readOperand(mem));
 		Word wordOnAddress = address.readOperand(mem);
 		wordOnAddress.setWordValue(result);
-		pc.setPC(pc.getPC() + 1);
+		pc.incrementPC();
 	}
 	
 	public String toString(){
 		return opName + " " + this.o1 + " " + this.o2 + " " + this.address;
 	}
-
 }

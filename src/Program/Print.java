@@ -15,14 +15,12 @@ public class Print implements Instruction {
 	@Override
 	public void execute(Memory mem, PC pc) {
 		System.out.println(op.readOperand(mem));
-		pc.setPC(pc.getPC() + 1);
-		
+		pc.incrementPC();
 	}
 
 	@Override
 	public String toString() {
 		return opName + " " + op.toString();
-		
 	}
 
 }
