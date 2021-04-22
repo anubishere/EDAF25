@@ -10,6 +10,7 @@ public class Computer {
 
 	public Computer(Memory memory) {
         this.memory = memory;
+        this.pc = new PC();
     }
     public void load(Program program){
         this.program = program;
