@@ -32,7 +32,7 @@ public abstract class BinaryExpr implements Instruction  {
 	}
 	
 	public String toString(){
-		return opName + this.o1 + " " + this.o2 + " " + this.address;
+		return opName + " " + this.o1 + " " + this.o2 + " " + this.address;
 	}
 
 }

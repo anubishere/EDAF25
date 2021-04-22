@@ -27,6 +27,6 @@ public class JumpEq implements Instruction {
 
 	@Override
 	public String toString() {
-		return opName + " " + op1 + " " + op2;
+		return this.opName + " " + this.dest + " " + op1 + " " + op2;
 	} 
 }
