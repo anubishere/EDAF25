@@ -20,7 +20,7 @@ public class Print implements Instruction {
 
 	@Override
 	public String toString() {
-		return opName + " " + op.toString();
+		return opName + " " + op;
 	}
 
 }
