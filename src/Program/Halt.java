@@ -13,6 +13,6 @@ public class Halt implements Instruction {
     }
     @Override
     public String toString() {
-		return "opName";
+		return this.opName;
 	}
 }

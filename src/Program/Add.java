@@ -12,11 +12,9 @@ public class Add extends BinaryExpr {
 	}
 	
 	/* Metoden i BinaryExpr skuggas */
-	
 	@Override
 	protected Word compute(Word o1, Word o2) {
 		Word newWord = o1.add(o2);
 		return newWord;	
 	}
-
 }
