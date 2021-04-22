@@ -4,14 +4,14 @@ import Computer.Memory;
 import Computer.Word;
 
 public class Address implements Operand{
-	private int index;
+	private int address;
 	
-	public Address(int index) {
-		this.index = index;
+	public Address(int address) {
+		this.address = address;
 	}
 	
-	public int getIndex() {
-		return this.index;
+	public int getAddress() {
+		return this.address;
 	}
 
 	@Override
@@ -21,7 +21,7 @@ public class Address implements Operand{
 
 	@Override
 	public String toString(){
-		return "[" + index + "]";
+		return "[" + address + "]";
 	}
 	
 }
