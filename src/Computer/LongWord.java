@@ -9,12 +9,12 @@ public class LongWord implements Word{
 
     @Override
     public Word add(Word w) {
-        return new LongWord((w).getWordValue() + this.word);
+        return new LongWord(w.getWordValue() + this.word);
     }
 
     @Override
     public Word mul(Word w) {
-        return new LongWord((w).getWordValue() * this.word);
+        return new LongWord(w.getWordValue() * this.word);
     }
 
     @Override
