@@ -22,7 +22,7 @@ public class Print implements Instruction {
 
 	@Override
 	public String toString() {
-		return opName + " " + op;
+		return opName + " " + op.toString();
 		
 	}
 
