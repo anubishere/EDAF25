@@ -5,11 +5,10 @@ import Computer.PC;
 
 public class Print implements Instruction {
 	
-	private String opName;
+	private final String opName = "PRT";
 	private Operand op;
 	
-	public Print(String opName, Operand op) {
-		this.opName = opName;
+	public Print(Operand op) {
 		this.op = op;
 		
 	}

@@ -3,6 +3,8 @@ package Program;
 import Computer.Word;
 
 public class Mul extends BinaryExpr{
+	
+	private final String opName = "MUL";
 
     protected Mul(Operand o1, Operand o2, Operand address) {
         super(o1, o2, address, "MUL");

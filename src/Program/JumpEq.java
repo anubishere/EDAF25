@@ -5,13 +5,12 @@ import Computer.PC;
 
 public class JumpEq implements Instruction {
 
-	private final String opName;
+	private final String opName = "JEQ";
 	private int dest;
 	private Operand op1;
 	private Operand op2;
 
-	public JumpEq(String opName, int dest, Operand op1, Operand op2) {
-		this.opName = opName;
+	public JumpEq(int dest, Operand op1, Operand op2) {
 		this.dest = dest;
 		this.op1 = op1;
 		this.op2 = op2;

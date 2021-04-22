@@ -5,12 +5,11 @@ import Computer.PC;
 
 public class Copy implements Instruction {
 
-	private final String opName;
+	private final String opName = "CPY";
 	private Operand op;
 	private Address address;
 
 	public Copy(Operand op, Address address) {
-		this.opName = "CPY";
 		this.op = op;
 		this.address = address;
 	}

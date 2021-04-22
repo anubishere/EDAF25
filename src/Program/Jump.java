@@ -5,12 +5,11 @@ import Computer.PC;
 
 public class Jump implements Instruction {
 	
-	private final String opName;
+	private final String opName = "JMP";
 	private int dest;
 	private Operand op;
 	
-	public Jump(String opName, int dest, Operand op) {
-		this.opName = opName;
+	public Jump(int dest, Operand op) {
 		this.dest = dest;
 		this.op = op;
 		
