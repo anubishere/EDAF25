@@ -7,24 +7,18 @@ public class Jump implements Instruction {
 	
 	private final String opName = "JMP";
 	private int dest;
-	private Operand op;
 	
-	public Jump(int dest, Operand op) {
+	public Jump(int dest) {
 		this.dest = dest;
-		this.op = op;
-		
 	}
 	
 	@Override
 	public void execute(Memory mem, PC pc) {
-		pc.setPC(pc.getPC() + dest);
-		
+		pc.setPC(dest);
 	}
 
 	@Override
 	public String toString() {
-		return opName + " " + op;
+		return opName + " " + this.dest;
 	}
-
-	
 }
