@@ -21,7 +21,7 @@ public class Address implements Operand{
 
 	@Override
 	public String toString(){
-		return "[" + index + "]"
+		return "[" + index + "]";
 	}
 	
 }
