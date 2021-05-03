@@ -9,7 +9,7 @@ public class EmptyCell implements CellEntry {
     }
 
     @Override
-    public ExprResult value(Environment e) {
+    public double value(Environment e) {
         return 0.0;
     }
 
