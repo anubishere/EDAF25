@@ -24,6 +24,8 @@ public class XLModel {
   }
 
   public void saveFile(File file) {
+    XLPrintStream print = new XLPrintStream(file);
+    print.save(this.cellMap);
   }
 
   public void clear() {
