@@ -23,4 +23,25 @@ public class XLModel {
 
   public void saveFile(File file) {
   }
+
+  public void clear() {
+
+  }
+
+  public String getCellValue(CellAddress address) {
+
+  }
+
+  public String getCellName(CellAddress address) {
+
+  }
+  public void remove(CellAddress address) {
+
+  }
+
+  public void put(CellAddress, CellEntry) {
+
+  }
+
+}
 }
