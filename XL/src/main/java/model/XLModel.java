@@ -7,6 +7,7 @@ import java.io.FileNotFoundException;
 
 public class XLModel {
   public static final int COLUMNS = 10, ROWS = 10;
+  private Map<String, CellEntry> cellMap;
 
   /**
    * Called when the code for a cell changes.
@@ -19,6 +20,7 @@ public class XLModel {
 
   public void loadFile(File file) throws FileNotFoundException {
     XLBufferedReader reader = new XLBufferedReader(file);
+    reader.load(this.cellMap);
   }
 
   public void saveFile(File file) {
