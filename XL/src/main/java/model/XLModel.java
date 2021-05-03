@@ -4,10 +4,16 @@ import util.XLBufferedReader;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class XLModel {
   public static final int COLUMNS = 10, ROWS = 10;
   private Map<String, CellEntry> cellMap;
+
+  public XLModel() {
+    cellMap = new HashMap<>();
+  }
 
   /**
    * Called when the code for a cell changes.
