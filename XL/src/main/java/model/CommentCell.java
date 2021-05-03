@@ -11,12 +11,12 @@ public class CommentCell implements CellEntry {
 
     }
 
-    public String getComment(){
-        return comment;
-    }
-
     @Override
     public double value(Environment e) {
         return 0.0;
+    }
+    @Override
+    public String toString() {
+        return comment;
     }
 }
