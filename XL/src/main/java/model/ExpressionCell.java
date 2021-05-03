@@ -13,7 +13,7 @@ public class ExpressionCell implements CellEntry {
     }
 
     @Override
-    public double value(Environment e) {
+    public ExprResult value(Environment e) {
         return expression.value(e);
     }
 

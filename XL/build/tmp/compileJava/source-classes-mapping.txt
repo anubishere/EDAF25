@@ -1,3 +1,5 @@
+util/XLPrintStream.java
+ util.XLPrintStream
 gui/XL.java
  gui.XL
 expr/Mul.java
@@ -12,12 +14,16 @@ expr/ExprResult.java
  expr.ExprResult
 module-info.java
  module-info
+model/ExpressionCell.java
+ model.ExpressionCell
 expr/Add.java
  expr.Add
 gui/ColumnHeader.java
  gui.ColumnHeader
 expr/Variable.java
  expr.Variable
+util/XLBufferedReader.java
+ util.XLBufferedReader
 model/CellEntry.java
  model.CellEntry
 gui/GridCell.java
@@ -32,6 +38,8 @@ expr/ExprParser.java
  expr.ExprParser
 expr/BinaryExpr.java
  expr.BinaryExpr
+util/XLException.java
+ util.XLException
 model/CommentCell.java
  model.CommentCell
 gui/menu/SaveMenuItem.java

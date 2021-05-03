@@ -5,7 +5,7 @@ import expr.ExprResult;
 
 public interface CellEntry {
 
-    public double value(Environment e);
+    public ExprResult value(Environment e);
 
     public String toString();
 }
