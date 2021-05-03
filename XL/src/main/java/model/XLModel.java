@@ -5,6 +5,7 @@ import util.XLPrintStream;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -26,12 +27,16 @@ public class XLModel {
   }
 
   public void loadFile(File file) throws FileNotFoundException {
-    XLBufferedReader reader = new XLBufferedReader(file);
-    reader.load(this.cellMap);
+    try {
+      XLBufferedReader reader = new XLBufferedReader(file);
+      reader.load(this.cellMap);
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
   }
 
-  public void saveFile(File file) {
-    XLPrintStream print = new XLPrintStream(file);
+  public void saveFile(File file) throws FileNotFoundException { //this might be wrong
+    XLPrintStream print = new XLPrintStream(file.getName());
     print.save(this.cellMap);
   }
 
@@ -40,11 +45,11 @@ public class XLModel {
   }
 
   public String getCellValue(CellAddress address) {
-
+    return "";
   }
 
   public String getCellName(CellAddress address) {
-
+    return "";
   }
   public void remove(CellAddress address) {
 

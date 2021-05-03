@@ -20,6 +20,7 @@ import model.CellAddress;
 import model.XLModel;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -127,6 +128,10 @@ public class XL extends Application {
   }
 
   public void saveFile(File file) {
-    model.saveFile(file);
+    try {
+      model.saveFile(file);
+    } catch (FileNotFoundException e) {
+      e.printStackTrace();
+    }
   }
 }

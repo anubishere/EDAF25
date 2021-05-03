@@ -1,5 +1,8 @@
 package util;
 
+import model.CellAddress;
+import model.CellEntry;
+import model.CommentCell;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -12,13 +15,18 @@ public class XLBufferedReader extends BufferedReader {
     super(new FileReader(file));
   }
 
-  public void load(Map<String, CellEntry> map) throws IOException {
+  public void load(Map<CellAddress, CellEntry> map) throws IOException {
+    try {
       while (ready()) {
         String string = readLine();
-        String result = string.split("=");
+
+        // kolla vilken typ av cell
+
+        String result[] = string.split("=");
         String cell = result[0];
         String value = result[1];
-        map.put(cell, value);
+
+
       }
     } catch (Exception e) {
       throw new XLException(e.getMessage());
