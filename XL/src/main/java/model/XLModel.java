@@ -10,7 +10,7 @@ import java.util.Map;
 
 public class XLModel {
   public static final int COLUMNS = 10, ROWS = 10;
-  private Map<String, CellEntry> cellMap;
+  private Map<CellAddress, CellEntry> cellMap;
 
   public XLModel() {
     cellMap = new HashMap<>();
@@ -51,7 +51,7 @@ public class XLModel {
   }
 
   public void put(CellAddress address, CellEntry cell) {
-
+    cellMap.put(address, cell);
   }
 
 }
