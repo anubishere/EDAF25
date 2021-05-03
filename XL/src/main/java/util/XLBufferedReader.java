@@ -12,8 +12,7 @@ public class XLBufferedReader extends BufferedReader {
     super(new FileReader(file));
   }
 
-  // TODO Change Object to something appropriate
-  public void load(Map<String, Object> map) throws IOException {
+  public void load(Map<String, CellEntry> map) throws IOException {
     try {
       while (ready()) {
         String string = readLine();
