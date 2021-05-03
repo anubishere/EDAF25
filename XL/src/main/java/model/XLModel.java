@@ -39,9 +39,9 @@ public class XLModel {
 
   }
 
-  public void put(CellAddress, CellEntry) {
+  public void put(CellAddress address, CellEntry cell) {
 
   }
 
 }
-}
+
