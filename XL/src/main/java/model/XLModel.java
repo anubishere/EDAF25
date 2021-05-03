@@ -26,6 +26,7 @@ public class XLModel {
 
   public void loadFile(File file) throws FileNotFoundException {
     XLBufferedReader reader = new XLBufferedReader(file);
+    reader.load(this.cellMap);
   }
 
   public void saveFile(File file) {
