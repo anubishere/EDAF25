@@ -2,6 +2,7 @@ package model;
 
 import util.XLBufferedReader;
 import util.XLPrintStream;
+import expr.Environment;
 
 import java.io.File;
 import java.io.FileNotFoundException;
