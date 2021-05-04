@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-public class XLModel {
+public class XLModel implements Environment {
   public static final int COLUMNS = 10, ROWS = 10;
   private Map<CellAddress, CellEntry> cellMap;
 
