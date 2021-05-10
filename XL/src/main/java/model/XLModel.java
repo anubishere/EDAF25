@@ -1,6 +1,7 @@
 package model;
 
 import expr.ExprResult;
+import javafx.beans.InvalidationListener;
 import util.XLBufferedReader;
 import util.XLException;
 import util.XLPrintStream;
@@ -11,8 +12,10 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Observable;
 
-public class XLModel implements Environment {
+public class XLModel extends Observable implements Environment {
+
   public static final int COLUMNS = 10, ROWS = 10;
   private Map<CellAddress, CellEntry> cellMap;
 
@@ -48,8 +51,23 @@ public class XLModel implements Environment {
     print.save(this.cellMap);
   }
 
-  public void clear() {
+  /*Sätter tomma celler på alla platser i mappen*/
 
+  public void clearAll() {
+    CellEntry empty = new EmptyCell();
+
+    for(int i = 0; i < cellMap.size(); i++){
+      CellEntry c = cellMap.get(i);
+      c = new EmptyCell();
+    }
+    notifyAll();          // uppdatera efter allt är clearat
+  }
+
+  public void clearOne(String name){
+    if(cellMap.containsKey(name)){
+      CellEntry temp = cellMap.get(name);
+      cellMap.remove(name);
+    }
   }
 
   public String getCellValue(CellAddress address) {
@@ -70,7 +88,7 @@ public class XLModel implements Environment {
   @Override
   public ExprResult value(String address) throws NullPointerException, NumberFormatException, XLException {
     if(cellMap.get(address) == null){
-      throw new XLException(String.format("Cell %s doest not exist.", address));
+      throw new XLException(String.format("Cell %s doest not exist.", address));          //%S är address
     }
     return cellMap.get(address).value(this);
   }
@@ -80,6 +98,8 @@ public class XLModel implements Environment {
 
   }
   //TODO fixa metod som returnerar text i en cell
+
+
 
 
 }
