@@ -122,6 +122,7 @@ public class XLModel implements ObservableModel, Environment {
 
   }
 
+  /*Notifyar alla observers om ändringar som gjorts*/
   @Override
   public void notifyObservers(String address, String newText) {
     CellBuilder cb = new CellBuilder();
@@ -130,7 +131,7 @@ public class XLModel implements ObservableModel, Environment {
     observers.forEach(obs -> obs.modelHasChanged(addr, newText));
 
   }
-  //TODO fixa metod som returnerar text i en cell
+
 
 
 }
