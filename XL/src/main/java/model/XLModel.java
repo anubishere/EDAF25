@@ -50,6 +50,8 @@ public class XLModel extends Observable implements Environment {
   }
 
   public void clear() {
+    cellMap.clear();
+    notifyObservers();
 
   }
 
