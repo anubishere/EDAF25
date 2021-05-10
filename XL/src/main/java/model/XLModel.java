@@ -26,7 +26,12 @@ public class XLModel implements Environment {
    * @param address address of the cell that is being edited
    * @param text    the new code for the cell - can be raw text (starting with #) or an expression
    */
-  public void update(CellAddress address, String text) {
+  public void update(CellAddress address, String text) throws IOException {
+
+    CellBuilder cb = new CellBuilder();
+    CellEntry cell = cb.generateCellEntry(address, text);
+    cellMap.put(address, cell);
+
   }
 
   public void loadFile(File file) throws FileNotFoundException {
