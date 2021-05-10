@@ -1,7 +1,6 @@
 package model;
 
 import expr.ExprResult;
-import javafx.beans.InvalidationListener;
 import util.XLBufferedReader;
 import util.XLException;
 import util.XLPrintStream;
@@ -15,7 +14,6 @@ import java.util.Map;
 import java.util.Observable;
 
 public class XLModel extends Observable implements Environment {
-
   public static final int COLUMNS = 10, ROWS = 10;
   private Map<CellAddress, CellEntry> cellMap;
 
@@ -51,23 +49,8 @@ public class XLModel extends Observable implements Environment {
     print.save(this.cellMap);
   }
 
-  /*Sätter tomma celler på alla platser i mappen*/
+  public void clear() {
 
-  public void clearAll() {
-    CellEntry empty = new EmptyCell();
-
-    for(int i = 0; i < cellMap.size(); i++){
-      CellEntry c = cellMap.get(i);
-      c = new EmptyCell();
-    }
-    notifyAll();          // uppdatera efter allt är clearat
-  }
-
-  public void clearOne(String name){
-    if(cellMap.containsKey(name)){
-      CellEntry temp = cellMap.get(name);
-      cellMap.remove(name);
-    }
   }
 
   public String getCellValue(CellAddress address) {
@@ -78,7 +61,8 @@ public class XLModel extends Observable implements Environment {
     return "";
   }
   public void remove(CellAddress address) {
-
+    cellMap.remove(address);
+    notifyObservers();
   }
 
   public void put(CellAddress address, CellEntry cell) {
@@ -88,7 +72,7 @@ public class XLModel extends Observable implements Environment {
   @Override
   public ExprResult value(String address) throws NullPointerException, NumberFormatException, XLException {
     if(cellMap.get(address) == null){
-      throw new XLException(String.format("Cell %s doest not exist.", address));          //%S är address
+      throw new XLException(String.format("Cell %s doest not exist.", address));
     }
     return cellMap.get(address).value(this);
   }
@@ -98,8 +82,6 @@ public class XLModel extends Observable implements Environment {
 
   }
   //TODO fixa metod som returnerar text i en cell
-
-
 
 
 }
