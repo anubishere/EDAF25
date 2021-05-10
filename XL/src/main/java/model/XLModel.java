@@ -11,8 +11,9 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Observable;
 
-public class XLModel implements Environment {
+public class XLModel extends Observable implements Environment {
   public static final int COLUMNS = 10, ROWS = 10;
   private Map<CellAddress, CellEntry> cellMap;
 
@@ -60,7 +61,8 @@ public class XLModel implements Environment {
     return "";
   }
   public void remove(CellAddress address) {
-
+    cellMap.remove(address);
+    notifyObservers();
   }
 
   public void put(CellAddress address, CellEntry cell) {
