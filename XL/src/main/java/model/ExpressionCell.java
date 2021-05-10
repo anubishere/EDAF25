@@ -6,7 +6,7 @@ import expr.ExprResult;
 
 public class ExpressionCell implements CellEntry {
 
-    Expr expression;
+    private Expr expression;
 
     public ExpressionCell(Expr expression){
         this.expression = expression;
