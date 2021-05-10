@@ -18,6 +18,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import model.CellAddress;
 import model.CellEntry;
+import model.EmptyCell;
 import model.XLModel;
 import util.XLException;
 
@@ -56,7 +57,7 @@ public class XL extends Application {
     }
     for (int r = 0; r < XLModel.ROWS; ++r) {
       for (int c = 0; c < XLModel.COLUMNS; ++c) {
-        CellAddress address = new CellAddress(c, r);
+        CellAddress address = new CellAddress(c, r+1); //r+1 to compensate for the fact that rows start at 1.
         GridCell cell = new GridCell(address, this::onCellSelected);
         cells.put(address.toString(), cell);
         GridPane.setConstraints(cell, c + 1, r + 1);

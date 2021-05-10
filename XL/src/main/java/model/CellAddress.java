@@ -31,6 +31,6 @@ public class CellAddress {
   }
 
   @Override public String toString() {
-    return columnAddress(col) + rowAddress(row);
+    return columnAddress(col) + rowAddress(row-1);
   }
 }
