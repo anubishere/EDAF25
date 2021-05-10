@@ -31,7 +31,7 @@ public class XLModel implements Environment {
     CellBuilder cb = new CellBuilder();
     CellEntry cell = cb.generateCellEntry(address, text);
     cellMap.put(address, cell);
-
+    String test;
   }
 
   public void loadFile(File file) throws FileNotFoundException {
