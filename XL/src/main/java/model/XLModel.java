@@ -49,7 +49,23 @@ public class XLModel extends Observable implements Environment {
     print.save(this.cellMap);
   }
 
+
+
   public void clear() {
+    for(int i = 0; i < cellMap.size(); i++){
+      CellEntry c = cellMap.get(i);
+      c = new EmptyCell();
+    }
+    notifyAll();          // uppdatera efter allt är clearat
+  }
+
+  public void clearOne(String name){
+    if(cellMap.containsKey(name)){
+      CellEntry temp = cellMap.get(name);
+      cellMap.remove(name);
+    }
+
+    notifyAll();
 
   }
 
