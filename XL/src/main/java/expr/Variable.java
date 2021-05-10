@@ -1,5 +1,7 @@
 package expr;
 
+import util.XLException;
+
 class Variable implements Expr {
   private String name;
 
@@ -12,6 +14,11 @@ class Variable implements Expr {
   }
 
   public ExprResult value(Environment env) {
-    return env.value(name);
+    try {
+      return env.value(name);
+    } catch (XLException e) {
+      e.printStackTrace();
+      return null;
+    }
   }
 }

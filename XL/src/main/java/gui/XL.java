@@ -17,7 +17,9 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import model.CellAddress;
+import model.CellEntry;
 import model.XLModel;
+import util.XLException;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -68,7 +70,11 @@ public class XL extends Application {
       // This listener is called when the user presses the enter key in the editor.
       GridCell cell = currentCell.get();
       if (cell != null) {
-        model.update(cell.address, editor.getText());
+        try {
+          model.update(cell.address, editor.getText());
+        } catch (IOException e) {
+          e.printStackTrace();
+        }
       }
     });
     currentCell.addListener((observable, oldValue, newValue) -> {
@@ -79,6 +85,7 @@ public class XL extends Application {
         addressLbl.setText(newValue.address.toString() + " =");
         editor.setDisable(false);
         // TODO: update editor text.
+        editor.setText(newValue.address.toString() + "här ska va som finns i cellen visas");
         editor.requestFocus();
       } else {
         addressLbl.setText("?? =");
