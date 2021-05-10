@@ -13,7 +13,7 @@ public class CircularCell implements CellEntry {
 
     }
 
-    @Override public ExprResult value(Environment e) {
+    @Override public ExprResult value(Environment e) throws CircularError {
         throw new Error("Circular Value");
 
     }
