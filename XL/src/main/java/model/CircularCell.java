@@ -4,11 +4,22 @@ import expr.ErrorResult;
 import expr.ExprResult;
 import expr.Environment;
 
-public class CircularCell implements CellEntry  {
+public class CircularCell implements CellEntry {
+
+    private String circular;
+
+    public CircularCell(String circular) {
+        this.circular = circular;
+
+    }
 
     @Override public ExprResult value(Environment e) {
         throw new Error("Circular Value");
 
     }
 
+    @Override
+    public String toString() {
+        return circular;
+    }
 }
