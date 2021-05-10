@@ -52,6 +52,7 @@ public class XLModel extends Observable implements Environment {
 
 
   public void clear() {
+
     for(int i = 0; i < cellMap.size(); i++){
       CellEntry c = cellMap.get(i);
       c = new EmptyCell();
@@ -59,6 +60,7 @@ public class XLModel extends Observable implements Environment {
     notifyAll();          // uppdatera efter allt är clearat
   }
 
+  // cleara en cell
   public void clearOne(String name){
     if(cellMap.containsKey(name)){
       CellEntry temp = cellMap.get(name);
@@ -66,6 +68,10 @@ public class XLModel extends Observable implements Environment {
     }
 
     notifyAll();
+
+    cellMap.clear();
+    notifyObservers();
+
 
   }
 
