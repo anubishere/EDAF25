@@ -9,18 +9,18 @@ import expr.Environment;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Observable;
+import java.util.*;
 
-public class XLModel extends Observable implements Environment {
+public class XLModel implements ObservableModel, Environment {
   public static final int COLUMNS = 10, ROWS = 10;
   private Map<CellAddress, CellEntry> cellMap;
   private Map<CellAddress, CircularCell> visited;
+  private List<ModelObserver> observers; // la in lista med observers för att kunna notifyAll()
 
   public XLModel() {
     cellMap = new HashMap<>();
     visited = new HashMap<>();
+    observers = new ArrayList<>();
   }
 
   /**
@@ -34,7 +34,10 @@ public class XLModel extends Observable implements Environment {
     CellBuilder cb = new CellBuilder();
     CellEntry cell = cb.generateCellEntry(address, text);
     cellMap.put(address, cell);
+
+    notifyAll(); // notifyar till alla observers som lyssnar
     String test;
+
   }
 
   public void loadFile(File file) throws FileNotFoundException {
@@ -52,7 +55,8 @@ public class XLModel extends Observable implements Environment {
   }
 
 
-
+//TODO efter notifyAll() behöver update() användas
+  
   public void clear() {
 
     for(int i = 0; i < cellMap.size(); i++){
@@ -60,19 +64,13 @@ public class XLModel extends Observable implements Environment {
       c = new EmptyCell();
     }
     notifyAll();          // uppdatera efter allt är clearat
+
+
   }
 
   // cleara en cell
-  public void clearOne(String name){
-    if(cellMap.containsKey(name)){
-      CellEntry temp = cellMap.get(name);
-      cellMap.remove(name);
-    }
-
-    notifyAll();
-
-    cellMap.clear();
-    notifyObservers();
+  public void clearOne(CellAddress address) throws IOException {
+    update(address, "");
 
 
   }
@@ -84,10 +82,7 @@ public class XLModel extends Observable implements Environment {
   public String getCellName(CellAddress address) {
     return "";
   }
-  public void remove(CellAddress address) {
-    cellMap.remove(address);
-    notifyObservers();
-  }
+
 
   public void put(CellAddress address, CellEntry cell) {
     cellMap.put(address, cell);
@@ -102,7 +97,7 @@ public class XLModel extends Observable implements Environment {
   }
 
   @Override
-  public ExprResult value(String address) throws NullPointerException, NumberFormatException, XLException {
+  public ExprResult value(String address) throws NullPointerException, NumberFormatException, XLException, CircularError {
     CellAddress addr = CellBuilder.stringToAddress(address);
     if(!cellMap.containsKey(addr)){
       throw new XLException(String.format("Cell %s does not exist.", addr));
@@ -113,6 +108,26 @@ public class XLModel extends Observable implements Environment {
   public boolean cellExists(String address){
     CellAddress addr = CellBuilder.stringToAddress(address);
     return cellMap.get(addr) != null;
+
+  }
+
+  @Override
+  public void addObserver(ModelObserver observer) {
+    observers.add(observer);
+  }
+
+  @Override
+  public void clearAllObservers() {
+    observers.clear();
+
+  }
+
+  @Override
+  public void notifyObservers(String address, String newText) {
+    CellBuilder cb = new CellBuilder();
+    CellAddress addr = cb.stringToAddress(address);
+
+    observers.forEach(obs -> obs.modelHasChanged(addr, newText));
 
   }
   //TODO fixa metod som returnerar text i en cell

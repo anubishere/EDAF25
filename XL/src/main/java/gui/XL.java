@@ -32,6 +32,12 @@ public class XL extends Application {
 
   public XL() {
     // TODO: add listener(s) for model?
+
+    /* Lägger in observer i modellen
+    *  använder cellValueUpdated för att uppdatera värdet*/
+    model.addObserver((CellAddress address, String newValue) -> {
+      cellValueUpdated(address.toString(), newValue);
+    });
   }
 
   public void onCellSelected(GridCell cell) {
@@ -47,11 +53,14 @@ public class XL extends Application {
     }
     Label addressLbl = new Label("?? =");
     addressLbl.setMinWidth(35);
+
+    /* ----- Create cells -----*/
     for (int r = 0; r < XLModel.ROWS; ++r) {
       Label lbl = new RowHeader(r);
       GridPane.setConstraints(lbl, 0, r + 1);
       sheet.getChildren().add(lbl);
     }
+
     for (int r = 0; r < XLModel.ROWS; ++r) {
       for (int c = 0; c < XLModel.COLUMNS; ++c) {
         CellAddress address = new CellAddress(c, r+1); //r+1 to compensate for the fact that rows start at 1.
@@ -62,6 +71,8 @@ public class XL extends Application {
         model.put(address, new EmptyCell()); //Fyller modelmappen med tomma celler.
       }
     }
+
+    /* --------- EDITOR --------- */
     TextField editor = new TextField();
     editor.setMinWidth(320);
     editor.setDisable(true);
@@ -76,6 +87,8 @@ public class XL extends Application {
         }
       }
     });
+
+    /* ----------------- CURRENT CELL -----------------*/
     currentCell.addListener((observable, oldValue, newValue) -> {
       if (oldValue != null) {
         oldValue.onDeselect();
@@ -97,6 +110,8 @@ public class XL extends Application {
         editor.setDisable(true);
       }
     });
+
+    /* -------------- UI --------------*/
     HBox editBox = new HBox(5);
     editBox.setAlignment(Pos.BASELINE_LEFT);
     editBox.getChildren().add(addressLbl);

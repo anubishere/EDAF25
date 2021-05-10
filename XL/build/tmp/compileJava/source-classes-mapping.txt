@@ -22,6 +22,8 @@ gui/ColumnHeader.java
  gui.ColumnHeader
 expr/Variable.java
  expr.Variable
+model/ObservableModel.java
+ model.ObservableModel
 util/XLBufferedReader.java
  util.XLBufferedReader
 model/CellEntry.java
@@ -36,6 +38,8 @@ expr/ValueResult.java
  expr.ValueResult
 expr/ExprParser.java
  expr.ExprParser
+model/ModelObserver.java
+ model.ModelObserver
 expr/BinaryExpr.java
  expr.BinaryExpr
 util/XLException.java

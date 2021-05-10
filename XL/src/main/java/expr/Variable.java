@@ -1,5 +1,6 @@
 package expr;
 
+import model.CircularError;
 import util.XLException;
 
 class Variable implements Expr {
@@ -16,7 +17,7 @@ class Variable implements Expr {
   public ExprResult value(Environment env) {
     try {
       return env.value(name);
-    } catch (XLException e) {
+    } catch (XLException | CircularError e) {
       e.printStackTrace();
       return null;
     }
