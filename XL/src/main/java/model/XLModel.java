@@ -70,7 +70,11 @@ public class XLModel implements Environment {
     return cellMap.get(address).value(this);
   }
 
-  public boolean cellExists()
+  public boolean cellExists(String address){
+    return cellMap.get(address) != null;
+
+  }
+  //TODO fixa metod som returnerar text i en cell
 
 
 }
