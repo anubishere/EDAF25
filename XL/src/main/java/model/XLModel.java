@@ -16,9 +16,11 @@ import java.util.Observable;
 public class XLModel extends Observable implements Environment {
   public static final int COLUMNS = 10, ROWS = 10;
   private Map<CellAddress, CellEntry> cellMap;
+  private Map<CellAddress, CircularCell> visited;
 
   public XLModel() {
     cellMap = new HashMap<>();
+    visited = new HashMap<>();
   }
 
   /**
