@@ -93,16 +93,26 @@ public class XLModel extends Observable implements Environment {
     cellMap.put(address, cell);
   }
 
+  public CellEntry getEntry(String address) throws XLException {
+    CellAddress addr = CellBuilder.stringToAddress(address);
+    if(!cellMap.containsKey(addr)){
+      throw new XLException(String.format("Cell %s does not exist.", addr));
+    }
+    return cellMap.get(addr);
+  }
+
   @Override
   public ExprResult value(String address) throws NullPointerException, NumberFormatException, XLException {
-    if(cellMap.get(address) == null){
-      throw new XLException(String.format("Cell %s doest not exist.", address));
+    CellAddress addr = CellBuilder.stringToAddress(address);
+    if(!cellMap.containsKey(addr)){
+      throw new XLException(String.format("Cell %s does not exist.", addr));
     }
-    return cellMap.get(address).value(this);
+    return cellMap.get(addr).value(this);
   }
 
   public boolean cellExists(String address){
-    return cellMap.get(address) != null;
+    CellAddress addr = CellBuilder.stringToAddress(address);
+    return cellMap.get(addr) != null;
 
   }
   //TODO fixa metod som returnerar text i en cell

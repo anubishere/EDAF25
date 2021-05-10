@@ -6,7 +6,6 @@ import expr.ValueResult;
 
 public class EmptyCell implements CellEntry {
     public EmptyCell(){
-
     }
 
     @Override

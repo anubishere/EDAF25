@@ -2,6 +2,8 @@ package model;
 
 import com.google.common.base.Preconditions;
 
+import java.util.Objects;
+
 /**
  * Represents a cell address as a pair of zero-based column/row indices.
  */
@@ -32,5 +34,18 @@ public class CellAddress {
 
   @Override public String toString() {
     return columnAddress(col) + rowAddress(row-1);
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    CellAddress that = (CellAddress) o;
+    return col == that.col && row == that.row;
+  }
+
+  @Override
+  public int hashCode() { //needed in order to be put into a hashmap
+    return Objects.hash(col, row);
   }
 }

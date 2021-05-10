@@ -16,10 +16,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import model.CellAddress;
-import model.CellEntry;
-import model.EmptyCell;
-import model.XLModel;
+import model.*;
 import util.XLException;
 
 import java.io.File;
@@ -62,6 +59,7 @@ public class XL extends Application {
         cells.put(address.toString(), cell);
         GridPane.setConstraints(cell, c + 1, r + 1);
         sheet.getChildren().add(cell);
+        model.put(address, new EmptyCell()); //Fyller modelmappen med tomma celler.
       }
     }
     TextField editor = new TextField();
@@ -83,10 +81,16 @@ public class XL extends Application {
         oldValue.onDeselect();
       }
       if (newValue != null) {
-        addressLbl.setText(newValue.address.toString() + " =");
+        String address = newValue.address.toString();
+        addressLbl.setText(address + " =");
         editor.setDisable(false);
         // TODO: update editor text.
-        editor.setText(newValue.address.toString() + "här ska va som finns i cellen visas");
+        // har gjort
+        try {
+          editor.setText(model.getEntry(newValue.address.toString()).toString()); //kanske behöver ändras
+        } catch (XLException e) {
+          e.printStackTrace();
+        }
         editor.requestFocus();
       } else {
         addressLbl.setText("?? =");
