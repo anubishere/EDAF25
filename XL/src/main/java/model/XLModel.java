@@ -1,6 +1,8 @@
 package model;
 
+import expr.ExprResult;
 import util.XLBufferedReader;
+import util.XLException;
 import util.XLPrintStream;
 import expr.Environment;
 
@@ -59,6 +61,17 @@ public class XLModel implements Environment {
   public void put(CellAddress address, CellEntry cell) {
     cellMap.put(address, cell);
   }
+
+  @Override
+  public ExprResult value(String address) throws NullPointerException, NumberFormatException, XLException {
+    if(cellMap.get(address) == null){
+      throw new XLException(String.format("Cell %s doest not exist.", address));
+    }
+    return cellMap.get(address).value(this);
+  }
+
+  public boolean cellExists()
+
 
 }
 
