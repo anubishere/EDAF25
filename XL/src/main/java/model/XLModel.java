@@ -4,6 +4,7 @@ import expr.*;
 import util.XLBufferedReader;
 import util.XLException;
 import util.XLPrintStream;
+import expr.ExprParser;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -29,10 +30,20 @@ public class XLModel implements ObservableModel, Environment {
    * @param text    the new code for the cell - can be raw text (starting with #) or an expression
    */
   public void update(CellAddress address, String text) throws IOException {
-
+    ExprParser ex = new ExprParser();
+    ExpressionCell newCell = new ExpressionCell(ex.build(text));
+    cellMap.put(address, new CircularCell(text));
     CellBuilder cb = new CellBuilder();
     CellEntry cell = cb.generateCellEntry(address, text);
     cellMap.put(address, cell);
+
+    try {
+      newCell.value(this);
+      cellMap.put(address, newCell);
+    } catch (Error e) { //Hantering av cirkulära fel.
+      cellMap.put(address, new ErrorCell());
+
+    }
 
     //notifyAll(); // notifyar till alla observers som lyssnar
     String test;
