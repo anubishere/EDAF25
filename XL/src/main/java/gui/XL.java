@@ -163,4 +163,9 @@ public class XL extends Application {
       e.printStackTrace();
     }
   }
+
+  /*tar cellMap.get(address) som string och kollar om det är en kommentar*/
+  private boolean isComment(String s){
+    return s.startsWith("#");
+  }
 }
