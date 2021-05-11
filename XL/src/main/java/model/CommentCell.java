@@ -1,6 +1,7 @@
 package model;
 
 import expr.Environment;
+import expr.ErrorResult;
 import expr.ExprResult;
 import expr.ValueResult;
 
@@ -15,8 +16,8 @@ public class CommentCell implements CellEntry {
 
     @Override
     public ExprResult value(Environment e) {
-        ValueResult empty = new ValueResult(0.0);
-        return empty;
+        ErrorResult error = new ErrorResult("references comment");
+        return error;
     }
     @Override
     public String toString() {
