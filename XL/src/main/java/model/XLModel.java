@@ -35,7 +35,7 @@ public class XLModel implements ObservableModel, Environment {
     CellEntry cell = cb.generateCellEntry(address, text);
     cellMap.put(address, cell);
 
-    notifyAll(); // notifyar till alla observers som lyssnar
+    //notifyAll(); // notifyar till alla observers som lyssnar
     String test;
 
   }
@@ -63,7 +63,7 @@ public class XLModel implements ObservableModel, Environment {
       CellEntry c = cellMap.get(i);
       c = new EmptyCell();
     }
-    notifyAll();          // uppdatera efter allt är clearat
+    //notifyAll();          // uppdatera efter allt är clearat
 
 
   }
