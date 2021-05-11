@@ -1,12 +1,9 @@
 package model;
 
-import expr.Expr;
-import expr.ExprParser;
-import expr.ExprResult;
+import expr.*;
 import util.XLBufferedReader;
 import util.XLException;
 import util.XLPrintStream;
-import expr.Environment;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -144,8 +141,9 @@ public class XLModel implements ObservableModel, Environment {
         ExprParser parser = new ExprParser();
         Expr expr = parser.build(e.toString()); //detta är nog fel,
         ExprResult result = expr.value(this);
-        if (result.isError()) {
-          return "expression contains some error"; //placeholder
+        System.out.println(result.getClass() + " " + result.toString());
+        if (result instanceof ErrorResult) {
+          return result.toString();
         } else {
           return Double.toString(result.value()); //Returns the result of the expression
         }
@@ -154,7 +152,7 @@ public class XLModel implements ObservableModel, Environment {
         b.printStackTrace(); //placeholder
       }
     } else if (e instanceof CircularCell){
-      return ""; //Error här egentligen?
+      return "Circular error"; //Error här egentligen?
     }
     return "Cell is not an instance of any of the above types";
   }
