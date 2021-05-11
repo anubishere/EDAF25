@@ -14,12 +14,10 @@ import java.util.*;
 public class XLModel implements ObservableModel, Environment {
   public static final int COLUMNS = 10, ROWS = 10;
   private Map<CellAddress, CellEntry> cellMap;
-  private Map<CellAddress, CircularCell> visited;
   private List<ModelObserver> observers; // la in lista med observers för att kunna notifyAll()
 
   public XLModel() {
     cellMap = new HashMap<>();
-    visited = new HashMap<>();
     observers = new ArrayList<>();
   }
 
@@ -41,7 +39,7 @@ public class XLModel implements ObservableModel, Environment {
       newCell.value(this);
       cellMap.put(address, newCell);
     } catch (Error e) { //Hantering av cirkulära fel.
-      cellMap.put(address, new ErrorCell());
+      cellMap.put(address, new ErrorCell(e.getMessage()));
 
     }
 
