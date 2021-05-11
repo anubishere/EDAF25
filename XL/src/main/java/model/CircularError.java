@@ -11,6 +11,6 @@ public class CircularError extends Exception {
 
     private String getError() {
         return error;
-        
+
     }
 }
