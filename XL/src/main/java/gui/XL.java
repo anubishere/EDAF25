@@ -83,7 +83,8 @@ public class XL extends Application {
         try {
           model.update(cell.address, editor.getText());
           CellEntry entry = model.getEntry(cell.address.toString());
-          cell.setText(entry.toString()); //The text in the view, this will be changed later
+          System.out.println(entry.getClass());
+          cell.setText(model.getEntryOutput(entry)); //The text in the view, this will be changed later
         } catch (IOException e) {
           e.printStackTrace();
         }

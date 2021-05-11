@@ -139,7 +139,7 @@ public class XLModel implements ObservableModel, Environment {
       return e.toString();
     } else if (e instanceof EmptyCell) {
       return "";
-    } else if (e instanceof expr.Expr) { //Vet inte om man kan använda interface här
+    } else if (e instanceof ExpressionCell) { //Vet inte om man kan använda interface här
       try {
         ExprParser parser = new ExprParser();
         Expr expr = parser.build(e.toString()); //detta är nog fel,
