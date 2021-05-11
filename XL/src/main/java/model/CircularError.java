@@ -3,15 +3,10 @@ package model;
 
 public class CircularError extends Throwable {
 
-    private String error;
+    private String value;
 
-    public CircularError(String error) {
-        this.error = error;
-
-    }
-
-    private String getError() {
-        return error;
+    public CircularError(String value) {
+        super(value);
 
     }
 }
