@@ -1,6 +1,7 @@
 package model;
 
 import expr.Environment;
+import expr.ErrorResult;
 import expr.ExprResult;
 import expr.ValueResult;
 
@@ -10,8 +11,8 @@ public class EmptyCell implements CellEntry {
 
     @Override
     public ExprResult value(Environment e) {
-        ValueResult empty = new ValueResult(0.0);
-        return empty;
+        ErrorResult error = new ErrorResult("refers to empty");
+        return error;
     }
 
     @Override
