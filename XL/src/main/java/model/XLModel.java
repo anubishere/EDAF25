@@ -45,9 +45,6 @@ public class XLModel implements ObservableModel, Environment {
 
     }
 
-    //notifyAll(); // notifyar till alla observers som lyssnar
-    String test;
-
   }
 
   public void loadFile(File file) throws FileNotFoundException {
@@ -166,6 +163,15 @@ public class XLModel implements ObservableModel, Environment {
       return "Circular error"; //Error här egentligen?
     }
     return "Cell is not an instance of any of the above types";
+  }
+
+  //Uppdaterar hela CellMappen
+  public void updateCellMap(){
+    cellMap.entrySet().forEach(entry ->{
+      CellAddress address = entry.getKey();
+      String entryOutput = getEntryOutput(entry.getValue());
+      notifyObservers(address.toString(), entryOutput);
+    });
   }
 
 }

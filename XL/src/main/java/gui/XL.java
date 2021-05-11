@@ -72,6 +72,7 @@ public class XL extends Application {
       }
     }
 
+
     /* --------- EDITOR --------- */
     TextField editor = new TextField();
     editor.setMinWidth(320);
@@ -91,6 +92,9 @@ public class XL extends Application {
           e.printStackTrace();
         }
       }
+
+      model.updateCellMap();
+
     });
 
     /* ----------------- CURRENT CELL -----------------*/
