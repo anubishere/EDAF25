@@ -163,4 +163,7 @@ public class XL extends Application {
       e.printStackTrace();
     }
   }
+  private boolean isComment(String s){
+    return s.startsWith("#");
+  }
 }
