@@ -8,7 +8,7 @@ public class CircularCell implements CellEntry {
 
     private String circular;
 
-    public CircularCell(String circular) throws CircularError {
+    public CircularCell(String circular) {
         this.circular = circular;
 
     }
