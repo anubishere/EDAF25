@@ -6,13 +6,21 @@ import expr.ErrorResult;
 
 public class ErrorCell implements CellEntry {
 
+    private String error;
+
+    public ErrorCell(String error) {
+        this.error = error;
+    }
+
     @Override
     public ExprResult value(Environment e) throws CircularError {
-        return new ErrorResult("Error");
+        return new ErrorResult(error);
+
     }
 
     @Override
     public String toString() {
-        return new ErrorResult("Error");
+        return new ErrorResult(error).toString();
+
     }
 }
