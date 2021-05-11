@@ -28,4 +28,18 @@ public class CellBuilder {
         }
         return new CellAddress(col, Integer.parseInt(row));
     }
+
+    public static String getEntryOutput(CellEntry e) {
+        if (e instanceof CommentCell) {
+            return e.toString();
+        } else if (e instanceof EmptyCell) {
+            return "";
+        } else if (e instanceof expr.Expr) { //Vet inte om man kan använda interface här
+            //return e.value().toString(); placeholder, vet inte hur detta ska funka
+            return "vet inte vad här ska vara";
+        } else if (e instanceof CircularCell){
+            return ""; //Error här egentligen?
+        }
+        return "error";
+    }
 }
