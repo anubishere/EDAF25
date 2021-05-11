@@ -1,5 +1,7 @@
 package model;
 
+import expr.Expr;
+import expr.ExprParser;
 import expr.ExprResult;
 import util.XLBufferedReader;
 import util.XLException;
@@ -132,7 +134,30 @@ public class XLModel implements ObservableModel, Environment {
 
   }
 
-
+  public String getEntryOutput(CellEntry e) {
+    if (e instanceof CommentCell) {
+      return e.toString();
+    } else if (e instanceof EmptyCell) {
+      return "";
+    } else if (e instanceof expr.Expr) { //Vet inte om man kan använda interface här
+      try {
+        ExprParser parser = new ExprParser();
+        Expr expr = parser.build(e.toString()); //detta är nog fel,
+        ExprResult result = expr.value(this);
+        if (result.isError()) {
+          return "expression contains some error"; //placeholder
+        } else {
+          return Double.toString(result.value()); //Returns the result of the expression
+        }
+      }
+      catch (Exception b){
+        b.printStackTrace(); //placeholder
+      }
+    } else if (e instanceof CircularCell){
+      return ""; //Error här egentligen?
+    }
+    return "Cell is not an instance of any of the above types";
+  }
 
 }
 
