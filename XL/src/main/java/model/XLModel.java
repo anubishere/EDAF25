@@ -163,7 +163,7 @@ public class XLModel implements ObservableModel, Environment {
     return "Cell is not an instance of any of the above types";
   }
 
-  //Uppdaterar hela CellMappen
+  //Notifies the observers when a change has occured
   public void updateCellMap(){
     cellMap.entrySet().forEach(entry ->{
       CellAddress address = entry.getKey();
