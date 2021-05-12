@@ -83,11 +83,13 @@ public class XL extends Application {
       if (cell != null) {
         try {
           model.update(cell.address, editor.getText());
-          CellEntry entry = model.getEntry(cell.address.toString());
-          System.out.println(entry.getClass());
-          String result = model.getEntryOutput(entry);
-          cell.setText(result); //The text in the view, this will be changed later
-          cell.setTooltip(new Tooltip(result));
+          //Commented code is unnecessary
+          //CellEntry entry = model.getEntry(cell.address.toString());
+          //System.out.println(entry.getClass());
+          //String result = model.getEntryOutput(entry);
+
+          cell.setText(editor.getText()); //The text in the view, this will be changed later
+          cell.setTooltip(new Tooltip(editor.getText()));
         } catch (IOException e) {
           e.printStackTrace();
         }
