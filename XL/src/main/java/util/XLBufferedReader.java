@@ -29,8 +29,8 @@ public class XLBufferedReader extends BufferedReader {
         CellAddress cellAddress = cb.stringToAddress(cell);
         CellEntry entry = cb.generateCellEntry(cellAddress, value);
         map.put(cellAddress, entry);
-        xl.notifyObservers(cellAddress.toString(), entry.toString());
       }
+      xl.updateCellMap();
     } catch (Exception e) {
       throw new XLException(e.getMessage());
     }
