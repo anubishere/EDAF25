@@ -14,8 +14,12 @@ public class CellBuilder {
             return new CommentCell(text.substring(1));
         }
         else {
-            ExprParser ex = new ExprParser();
-            return new ExpressionCell(ex.build(text));
+            try{
+                ExprParser ex = new ExprParser();
+                return new ExpressionCell(ex.build(text));
+            }catch(IOException e){ //Catches instances of expressions that are incalculable
+                return new ErrorCell(e.getMessage());
+            }
         }
     }
 
