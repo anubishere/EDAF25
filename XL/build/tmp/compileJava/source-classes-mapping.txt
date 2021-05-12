@@ -24,6 +24,8 @@ expr/Variable.java
  expr.Variable
 model/ObservableModel.java
  model.ObservableModel
+model/ErrorCell.java
+ model.ErrorCell
 util/XLBufferedReader.java
  util.XLBufferedReader
 model/CellEntry.java

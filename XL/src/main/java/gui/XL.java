@@ -175,4 +175,8 @@ public class XL extends Application {
   private boolean isComment(String s){
     return s.startsWith("#");
   }
+
+  public void clearAll(){
+    model.clear();
+  }
 }

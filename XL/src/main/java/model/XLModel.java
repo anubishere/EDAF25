@@ -67,11 +67,10 @@ public class XLModel implements ObservableModel, Environment {
   
   public void clear() {
 
-    for(int i = 0; i < cellMap.size(); i++){
-      CellEntry c = cellMap.get(i);
-      c = new EmptyCell();
+    for(CellAddress address : cellMap.keySet()){
+      cellMap.put(address, new EmptyCell());
     }
-    //notifyAll();          // uppdatera efter allt är clearat
+    updateCellMap();
 
 
   }
@@ -137,11 +136,7 @@ public class XLModel implements ObservableModel, Environment {
     CellAddress addr = cb.stringToAddress(address);
 
     observers.forEach(obs -> {
-      try {
-        obs.modelHasChanged(addr, newText);
-      } catch (XLException e) {
-        e.printStackTrace();
-      }
+      obs.modelHasChanged(addr, newText);
     });
 
   }

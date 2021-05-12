@@ -21,6 +21,7 @@ public class XLMenu extends MenuBar {
     });
     MenuItem clearAll = new MenuItem("ClearAll");
     clearAll.setOnAction(event -> {
+      xl.clearAll();
     });
     editMenu.getItems().addAll(clear, clearAll);
     getMenus().addAll(fileMenu, editMenu);
