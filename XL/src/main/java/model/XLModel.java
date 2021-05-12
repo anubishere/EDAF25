@@ -29,20 +29,23 @@ public class XLModel implements ObservableModel, Environment {
    */
   public void update(CellAddress address, String text) throws IOException {
     ExprParser ex = new ExprParser();
-    ExpressionCell newCell = new ExpressionCell(ex.build(text));
-    cellMap.put(address, new CircularCell(text));
-    CellBuilder cb = new CellBuilder();
-    CellEntry cell = cb.generateCellEntry(address, text);
-    cellMap.put(address, cell);
+    CellEntry ce = getEntry(address.toString());
 
-    try {
-      newCell.value(this);
-      cellMap.put(address, newCell);
-    } catch (Error e) { //Hantering av cirkulära fel.
-      cellMap.put(address, new ErrorCell(e.getMessage()));
-
+    if(ce instanceof ExpressionCell){
+      ExpressionCell newCell = new ExpressionCell(ex.build(text));
+      try {
+        newCell.value(this);
+        cellMap.put(address, newCell);
+      } catch (Error e) { //Hantering av cirkulära fel.
+        cellMap.put(address, new ErrorCell(e.getMessage()));
+      }
     }
-
+    else{
+      cellMap.put(address, new CircularCell(text));
+      CellBuilder cb = new CellBuilder();
+      CellEntry cell = cb.generateCellEntry(address, text);
+      cellMap.put(address, cell);
+    }
   }
 
   public void loadFile(File file) throws FileNotFoundException {
@@ -133,7 +136,13 @@ public class XLModel implements ObservableModel, Environment {
     CellBuilder cb = new CellBuilder();
     CellAddress addr = cb.stringToAddress(address);
 
-    observers.forEach(obs -> obs.modelHasChanged(addr, newText));
+    observers.forEach(obs -> {
+      try {
+        obs.modelHasChanged(addr, newText);
+      } catch (XLException e) {
+        e.printStackTrace();
+      }
+    });
 
   }
 
@@ -163,7 +172,7 @@ public class XLModel implements ObservableModel, Environment {
     return "Cell is not an instance of any of the above types";
   }
 
-  //Notifies the observers when a change has occured
+  //Updates the cellMap when a change occurs
   public void updateCellMap(){
     cellMap.entrySet().forEach(entry ->{
       CellAddress address = entry.getKey();
