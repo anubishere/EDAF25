@@ -179,4 +179,10 @@ public class XL extends Application {
   public void clearAll(){
     model.clear();
   }
+
+  public void clearOne() throws IOException {
+    GridCell cell = currentCell.get();
+    model.clearOne(cell.address);
+  }
+
 }

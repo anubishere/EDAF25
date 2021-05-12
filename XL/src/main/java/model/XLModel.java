@@ -77,9 +77,8 @@ public class XLModel implements ObservableModel, Environment {
 
   // cleara en cell
   public void clearOne(CellAddress address) throws IOException {
-    update(address, "");
-
-
+    cellMap.put(address, new EmptyCell());
+    updateCellMap();
   }
 
   public String getCellValue(CellAddress address) {
