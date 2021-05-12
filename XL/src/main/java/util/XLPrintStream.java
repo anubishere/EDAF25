@@ -2,6 +2,7 @@ package util;
 
 import model.CellAddress;
 import model.CellEntry;
+import model.EmptyCell;
 
 import java.io.FileNotFoundException;
 import java.io.PrintStream;
@@ -17,9 +18,11 @@ public class XLPrintStream extends PrintStream {
 
   public void save(Map<CellAddress, CellEntry> map) {
     for (Map.Entry<CellAddress, CellEntry> entry : map.entrySet()) {
-      print(entry.getKey());
-      print('=');
-      println(entry.getValue());
+      if(!(entry.getValue().toString().equals(""))){
+        print(entry.getKey());
+        print('=');
+        println(entry.getValue());
+      }
     }
     flush();
     close();
