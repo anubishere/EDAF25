@@ -66,17 +66,12 @@ public class XLModel implements ObservableModel, Environment {
 //TODO efter notifyAll() behöver update() användas
   
   public void clear() {
-
-    for(CellAddress address : cellMap.keySet()){
-      cellMap.put(address, new EmptyCell());
-    }
+    cellMap.replaceAll((a, v) -> new EmptyCell());
     updateCellMap();
-
-
   }
 
   // cleara en cell
-  public void clearOne(CellAddress address) throws IOException {
+  public void clearOne(CellAddress address){
     cellMap.put(address, new EmptyCell());
     updateCellMap();
   }
@@ -150,7 +145,7 @@ public class XLModel implements ObservableModel, Environment {
         ExprParser parser = new ExprParser();
         Expr expr = parser.build(e.toString()); //detta är nog fel,
         ExprResult result = expr.value(this);
-        System.out.println(result.getClass() + " " + result.toString());
+        System.out.println(result.getClass() + " " + result);
         if (result instanceof ErrorResult) {
           return result.toString();
         } else {
@@ -168,9 +163,8 @@ public class XLModel implements ObservableModel, Environment {
 
   //Updates the cellMap when a change occurs
   public void updateCellMap(){
-    cellMap.entrySet().forEach(entry ->{
-      CellAddress address = entry.getKey();
-      String entryOutput = getEntryOutput(entry.getValue());
+    cellMap.forEach((address, value) -> {
+      String entryOutput = getEntryOutput(value);
       notifyObservers(address.toString(), entryOutput);
     });
   }
