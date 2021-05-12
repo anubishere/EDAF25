@@ -50,7 +50,7 @@ public class XLModel implements ObservableModel, Environment {
 
   public void loadFile(File file) throws FileNotFoundException {
     try {
-      XLBufferedReader reader = new XLBufferedReader(file);
+      XLBufferedReader reader = new XLBufferedReader(file, this);
       reader.load(this.cellMap);
     } catch (IOException e) {
       e.printStackTrace();
