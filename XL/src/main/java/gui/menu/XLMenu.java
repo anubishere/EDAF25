@@ -22,6 +22,7 @@ public class XLMenu extends MenuBar {
     clear.setOnAction(event -> {
       try {
         xl.clearOne();
+        xl.clearEditor();
       } catch (IOException e) {
         e.printStackTrace();
       }
@@ -29,6 +30,7 @@ public class XLMenu extends MenuBar {
     MenuItem clearAll = new MenuItem("ClearAll");
     clearAll.setOnAction(event -> {
       xl.clearAll();
+      xl.clearEditor();
     });
     editMenu.getItems().addAll(clear, clearAll);
     getMenus().addAll(fileMenu, editMenu);

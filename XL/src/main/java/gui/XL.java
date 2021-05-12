@@ -29,6 +29,7 @@ public class XL extends Application {
   ObjectProperty<GridCell> currentCell = new SimpleObjectProperty<>();
   Map<String, GridCell> cells = new HashMap<>();
   XLModel model = new XLModel();
+  TextField editor;
 
   public XL() {
     // TODO: add listener(s) for model?
@@ -74,7 +75,7 @@ public class XL extends Application {
 
 
     /* --------- EDITOR --------- */
-    TextField editor = new TextField();
+    editor = new TextField();
     editor.setMinWidth(320);
     editor.setDisable(true);
     editor.setOnAction(event -> {
@@ -185,6 +186,10 @@ public class XL extends Application {
   public void clearOne() throws IOException {
     GridCell cell = currentCell.get();
     model.clearOne(cell.address);
+  }
+
+  public void clearEditor(){
+    editor.clear();
   }
 
 }
