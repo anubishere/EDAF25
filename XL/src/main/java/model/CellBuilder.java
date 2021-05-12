@@ -18,7 +18,7 @@ public class CellBuilder {
             try{
                 ExprParser ex = new ExprParser();
                 return new ExpressionCell(ex.build(text));
-            }catch(XLException e){ //Catches instances of expressions that are incalculable
+            }catch(Exception e){ //Catches instances of expressions that are incalculable
                 return new ErrorCell(e.getMessage());
             }
         }

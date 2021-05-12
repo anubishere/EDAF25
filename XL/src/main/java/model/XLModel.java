@@ -31,7 +31,7 @@ public class XLModel implements ObservableModel, Environment {
     ExprParser ex = new ExprParser();
     CellEntry ce = getEntry(address.toString());
 
-    if(ce instanceof ExpressionCell){
+    if(ce instanceof ExpressionCell && !text.equals("")){
       ExpressionCell newCell = new ExpressionCell(ex.build(text));
       cellMap.put(address, new CircularCell(text));
       try {
@@ -42,7 +42,6 @@ public class XLModel implements ObservableModel, Environment {
       }
     }
     else{
-
       CellBuilder cb = new CellBuilder();
       CellEntry cell = cb.generateCellEntry(address, text);
       cellMap.put(address, cell);
