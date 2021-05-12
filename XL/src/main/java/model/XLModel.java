@@ -157,6 +157,8 @@ public class XLModel implements ObservableModel, Environment {
       }
     } else if (e instanceof CircularCell){
       return "Circular error"; //Error här egentligen?
+    } else if(e instanceof ErrorCell){
+      return e.toString();
     }
     return "Cell is not an instance of any of the above types";
   }
