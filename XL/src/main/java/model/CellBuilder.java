@@ -25,13 +25,13 @@ public class CellBuilder {
     }
 
     public static CellAddress stringToAddress(String address) {
-        char firstChar = ((char) address.charAt(0));
+        char firstChar = address.charAt(0);
         int col = (int)firstChar - 65;
-        String row = "";
+        StringBuilder sb = new StringBuilder();
         for (int i=1; i<address.length(); i++) {
-            row += address.charAt(i);
+            sb.append(address.charAt(i));
         }
-        return new CellAddress(col, Integer.parseInt(row));
+        return new CellAddress(col, Integer.parseInt(sb.toString()));
     }
 
 

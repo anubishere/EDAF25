@@ -130,11 +130,7 @@ public class XLModel implements ObservableModel, Environment {
   public void notifyObservers(String address, String newText) {
     CellBuilder cb = new CellBuilder();
     CellAddress addr = cb.stringToAddress(address);
-
-    observers.forEach(obs -> {
-      obs.modelHasChanged(addr, newText);
-    });
-
+    observers.forEach(obs -> obs.modelHasChanged(addr, newText));
   }
 
   public String getEntryOutput(CellEntry e) {
