@@ -18,6 +18,7 @@ public class LoadMenuItem extends MenuItem {
       if (file != null) {
         // TODO
         xl.loadFile(file);
+        xl.clearEditor();
       }
     });
   }

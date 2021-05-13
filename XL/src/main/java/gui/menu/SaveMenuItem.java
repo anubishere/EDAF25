@@ -18,6 +18,7 @@ public class SaveMenuItem extends MenuItem {
       if (file != null) {
         // TODO
         xl.saveFile(file);
+        xl.clearEditor();
       }
     });
   }

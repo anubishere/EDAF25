@@ -7,7 +7,7 @@ import java.io.IOException;
 
 public class CellBuilder {
 
-    public CellEntry generateCellEntry(CellAddress address, String text) throws IOException {
+    public static CellEntry generateCellEntry(CellAddress address, String text) throws IOException {
         if(text.equals("")){
             return new EmptyCell();
         }

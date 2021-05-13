@@ -10,15 +10,11 @@ import java.io.IOException;
 import java.util.Map;
 
 public class XLBufferedReader extends BufferedReader {
-  XLModel xl;
-  public XLBufferedReader(File file, XLModel xl) throws FileNotFoundException {
+  public XLBufferedReader(File file) throws FileNotFoundException {
     super(new FileReader(file));
-    this.xl = xl;
   }
 
   public void load(Map<CellAddress, CellEntry> map) throws IOException {
-    xl.clear();
-    xl.updateCellMap();
     try {
       while (ready()) {
         String input = readLine();
@@ -30,7 +26,6 @@ public class XLBufferedReader extends BufferedReader {
         CellEntry entry = cb.generateCellEntry(cellAddress, value);
         map.put(cellAddress, entry);
       }
-      xl.updateCellMap();
     } catch (Exception e) {
       throw new XLException(e.getMessage());
     }

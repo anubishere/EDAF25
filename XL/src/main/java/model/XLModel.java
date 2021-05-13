@@ -49,12 +49,14 @@ public class XLModel implements ObservableModel, Environment {
   }
 
   public void loadFile(File file) throws FileNotFoundException {
+    this.clear();
     try {
-      XLBufferedReader reader = new XLBufferedReader(file, this);
+      XLBufferedReader reader = new XLBufferedReader(file);
       reader.load(this.cellMap);
     } catch (IOException e) {
       e.printStackTrace();
     }
+    this.updateCellMap();
   }
 
   public void saveFile(File file) throws FileNotFoundException { //this might be wrong
