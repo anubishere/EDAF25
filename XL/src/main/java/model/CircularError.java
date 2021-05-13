@@ -1,6 +1,7 @@
 package model;
 
-public class CircularError extends Error {
+
+public class CircularError extends Throwable {
 
     private String value;
 

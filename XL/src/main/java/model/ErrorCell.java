@@ -20,7 +20,7 @@ public class ErrorCell implements CellEntry {
 
     @Override
     public String toString() {
-        return error;
+        return new ErrorResult(error).toString();
 
     }
 }

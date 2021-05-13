@@ -20,6 +20,6 @@ public class CircularCell implements CellEntry {
 
     @Override
     public String toString() {
-        throw new CircularError("Circular Value");
+        return circular;
     }
 }
