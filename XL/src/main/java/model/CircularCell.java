@@ -14,7 +14,7 @@ public class CircularCell implements CellEntry {
     }
 
     @Override public ExprResult value(Environment e) throws CircularError {
-        throw new Error("Circular Value");
+        throw new CircularError("Circular Value");
 
     }
 
