@@ -23,7 +23,7 @@ public class XLBufferedReader extends BufferedReader {
         String value = result[1];
         CellBuilder cb = new CellBuilder();
         CellAddress cellAddress = cb.stringToAddress(cell);
-        CellEntry entry = cb.generateCellEntry(cellAddress, value);
+        CellEntry entry = cb.generateCellEntry(value);
         map.put(cellAddress, entry);
       }
     } catch (Exception e) {

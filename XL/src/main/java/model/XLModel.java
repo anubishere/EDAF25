@@ -43,7 +43,7 @@ public class XLModel implements ObservableModel, Environment {
     }
     else{
       CellBuilder cb = new CellBuilder();
-      CellEntry cell = cb.generateCellEntry(address, text);
+      CellEntry cell = cb.generateCellEntry(text);
       cellMap.put(address, cell);
     }
   }
