@@ -37,7 +37,7 @@ public class XLModel implements ObservableModel, Environment {
       try {
         newCell.value(this);
         cellMap.put(address, newCell);
-      } catch (Error e) { //Hantering av cirkulära fel.
+      } catch (CircularError e) { //Hantering av cirkulära fel.
         cellMap.put(address, new ErrorCell(e.getMessage()));
       }
     }
