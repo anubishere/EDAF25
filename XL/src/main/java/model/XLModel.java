@@ -33,7 +33,6 @@ public class XLModel implements ObservableModel, Environment {
 
     if(ce instanceof ExpressionCell && !text.equals("")){
       ExpressionCell newCell = new ExpressionCell(ex.build(text));
-      //cellMap.put(address, new CircularCell(text));
       checkIfCircular(ce, address);
     } else {
       CellBuilder cb = new CellBuilder();
@@ -167,7 +166,7 @@ public class XLModel implements ObservableModel, Environment {
         b.printStackTrace(); //placeholder
       }
     } else if (e instanceof CircularCell){
-      return e.toString(); //Error här egentligen?
+      return e.toString();
     } else if(e instanceof ErrorCell){
       return e.toString();
     }
