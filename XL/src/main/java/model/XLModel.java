@@ -33,20 +33,33 @@ public class XLModel implements ObservableModel, Environment {
 
     if(ce instanceof ExpressionCell && !text.equals("")){
       ExpressionCell newCell = new ExpressionCell(ex.build(text));
-      cellMap.put(address, new CircularCell(text));
-      try {
-        newCell.value(this);
-        cellMap.put(address, newCell);
-      } catch (CircularError e) { //Hantering av cirkulära fel.
-        cellMap.put(address, new ErrorCell(e.getMessage()));
-      }
-    }
-    else{
+      //cellMap.put(address, new CircularCell(text));
+      checkIfCircular(ce, address);
+    } else {
       CellBuilder cb = new CellBuilder();
       CellEntry cell = cb.generateCellEntry(text);
       cellMap.put(address, cell);
     }
   }
+
+  private boolean checkIfCircular(CellEntry newCell, CellAddress address) throws IOException {
+    CellEntry previous = getEntry(address.toString());
+    cellMap.put(address, new CircularCell("Circular Value"));
+
+    try {
+      newCell.value(this);
+    } catch (CircularError e) {
+      if (previous == null) {
+        cellMap.remove(address);
+      } else {
+        cellMap.put(address, previous);
+        return false;
+      }
+
+    }
+    return true;
+  }
+
 
   public void loadFile(File file) throws FileNotFoundException {
     this.clear();
@@ -154,7 +167,7 @@ public class XLModel implements ObservableModel, Environment {
         b.printStackTrace(); //placeholder
       }
     } else if (e instanceof CircularCell){
-      return "Circular error"; //Error här egentligen?
+      return e.toString(); //Error här egentligen?
     } else if(e instanceof ErrorCell){
       return e.toString();
     }
