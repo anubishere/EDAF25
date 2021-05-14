@@ -1,8 +1,9 @@
 package model;
 
+
 import expr.ErrorResult;
-import expr.ExprResult;
 import expr.Environment;
+import expr.ExprResult;
 
 public class CircularCell implements CellEntry {
 
@@ -14,12 +15,12 @@ public class CircularCell implements CellEntry {
     }
 
     @Override public ExprResult value(Environment e) throws CircularError {
-        throw new CircularError("Circular Value");
+       return new ErrorResult(circular);
 
     }
 
     @Override
     public String toString() {
-        throw new CircularError("Circular Value");
+        return circular;
     }
 }
