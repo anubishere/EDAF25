@@ -16,8 +16,7 @@ public class CommentCell implements CellEntry {
 
     @Override
     public ExprResult value(Environment e) {
-        ErrorResult error = new ErrorResult("references comment");
-        return error;
+        return new ErrorResult("references comment");
     }
     @Override
     public String toString() {

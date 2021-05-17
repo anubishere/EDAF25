@@ -13,8 +13,8 @@ import java.util.*;
 
 public class XLModel implements XLObserver, Environment {
     public static final int COLUMNS = 10, ROWS = 10;
-    private Map<CellAddress, CellEntry> cellMap;
-    private List<XLModelObserver> observers; // la in lista med observers för att kunna notifyAll()
+    private final Map<CellAddress, CellEntry> cellMap;
+    private final List<XLModelObserver> observers; // la in lista med observers för att kunna notifyAll()
 
     public XLModel() {
         cellMap = new HashMap<>();
@@ -29,12 +29,17 @@ public class XLModel implements XLObserver, Environment {
      */
     public void update(CellAddress address, String text) throws IOException {
         CellEntry newCe = CellBuilder.generateCellEntry(text);
-        if (circularCheckRecursion(address.toString(), newCe)) {
-            System.out.println("circular");
-            cellMap.put(address, new CircularCell("##ERROR (circular)"));
-        } else {
-            cellMap.put(address, newCe);
+        try{
+            if (circularCheckRecursion(address.toString(), newCe)) {
+                System.out.println("circular");
+                cellMap.put(address, new CircularCell("##ERROR (circular)"));
+            } else {
+                cellMap.put(address, newCe);
+            }
+        }catch(Exception e){
+            cellMap.put(address, new CircularCell("##ERROR (Cell does not exist)"));
         }
+
     }
 
     /*
@@ -48,8 +53,6 @@ public class XLModel implements XLObserver, Environment {
                 return true;
             } else if (uglyHelperFunction(s) != null) { //If the cell contents contains another address, check that address for a circular reference to the origin cell.
                 return circularCheckRecursion(targetAddr, cellMap.get(CellBuilder.stringToAddress(s)));
-            } else { //If this part of the expression doesn't contain an address, this part is not circular.
-                return false;
             }
         }
         return false;
@@ -84,7 +87,7 @@ public class XLModel implements XLObserver, Environment {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        this.updateCellMap();
+        updateCellMap();
     }
 
     public void saveFile(File file) throws FileNotFoundException { //this might be wrong
@@ -127,14 +130,7 @@ public class XLModel implements XLObserver, Environment {
     }
 
     @Override
-    public void addObserver(XLModelObserver observer) {
-        observers.add(observer);
-    }
-
-    @Override
-    public void clearAllObservers() {
-        observers.clear();
-    }
+    public void addObserver(XLModelObserver observer) { observers.add(observer); }
 
     /*
      Notifies all observers about changes that have been made.
@@ -152,7 +148,7 @@ public class XLModel implements XLObserver, Environment {
         if (e instanceof CommentCell) {
             return e.toString();
         } else if (e instanceof EmptyCell) {
-            return "";
+            return e.toString();
         } else if (e instanceof ExpressionCell) {
             try {
                 ExprParser parser = new ExprParser();
@@ -175,11 +171,7 @@ public class XLModel implements XLObserver, Environment {
 
     //Updates the cellMap when a change occurs
     public void updateCellMap() {
-        cellMap.forEach((address, value) -> {
-            String entryOutput = getEntryOutput(value);
-            notifyObservers(address.toString(), entryOutput);
-        });
+        cellMap.forEach((address, value) -> notifyObservers(address.toString(), getEntryOutput(value)));
     }
-
 }
 

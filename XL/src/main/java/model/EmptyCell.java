@@ -11,8 +11,7 @@ public class EmptyCell implements CellEntry {
 
     @Override
     public ExprResult value(Environment e) {
-        ErrorResult error = new ErrorResult("refers to empty");
-        return error;
+        return new ErrorResult("Refers to an empty cell");
     }
 
     @Override
