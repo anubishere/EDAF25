@@ -1,6 +1,6 @@
 package model;
 
-public interface ModelObserver {
+public interface XLModelObserver {
 
 
     /* @param cell är addressen för den cell där värdet har ändrats

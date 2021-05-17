@@ -1,11 +1,11 @@
 package model;
 
-public interface ObservableModel {
+public interface XLObserver {
 
 
     /*
     * Lägger till en observer som ska notifieras när något är ändrat */
-    void addObserver(ModelObserver observer);
+    void addObserver(XLModelObserver observer);
 
 
     void clearAllObservers();

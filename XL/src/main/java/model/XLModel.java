@@ -11,10 +11,10 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.*;
 
-public class XLModel implements ObservableModel, Environment {
+public class XLModel implements XLObserver, Environment {
   public static final int COLUMNS = 10, ROWS = 10;
   private Map<CellAddress, CellEntry> cellMap;
-  private List<ModelObserver> observers; // la in lista med observers för att kunna notifyAll()
+  private List<XLModelObserver> observers; // la in lista med observers för att kunna notifyAll()
 
   public XLModel() {
     cellMap = new HashMap<>();
@@ -174,7 +174,7 @@ public class XLModel implements ObservableModel, Environment {
   }
 
   @Override
-  public void addObserver(ModelObserver observer) {
+  public void addObserver(XLModelObserver observer) {
     observers.add(observer);
   }
 
