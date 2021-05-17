@@ -6,7 +6,7 @@ import util.XLException;
 
 public interface CellEntry {
 
-    public ExprResult value(Environment e) throws XLException;
+    ExprResult value(Environment e) throws XLException;
 
-    public String toString();
+    String toString();
 }

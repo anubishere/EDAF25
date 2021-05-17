@@ -37,7 +37,7 @@ public class CellAddress {
   }
 
   @Override
-  public boolean equals(Object o) {
+  public boolean equals(Object o) { //Must the implemented in order to be stored in a HashMap.
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     CellAddress that = (CellAddress) o;
@@ -45,7 +45,7 @@ public class CellAddress {
   }
 
   @Override
-  public int hashCode() { //needed in order to be put into a hashmap
+  public int hashCode() { //Must the implemented in order to be stored in a HashMap.
     return Objects.hash(col, row);
   }
 }

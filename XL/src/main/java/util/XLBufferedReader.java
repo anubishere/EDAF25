@@ -20,7 +20,7 @@ public class XLBufferedReader extends BufferedReader {
     try {
       while (ready()) {
         String input = readLine();
-        String[] result = input.split("=");
+        String[] result = input.split("="); //Each line has the address and its' contents, split them up accordingly.
         String cell = result[0];
         String value = result[1];
         CellAddress cellAddress = CellBuilder.stringToAddress(cell);

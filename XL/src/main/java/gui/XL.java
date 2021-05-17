@@ -101,7 +101,7 @@ public class XL extends Application {
         // TODO: update editor text.
         // har gjort
         try {
-          editor.setText(model.getEntry(newValue.address.toString()).toString()); //kanske behöver ändras
+          editor.setText(model.getEntry(newValue.address.toString()).toString());
         } catch (XLException e) {
           e.printStackTrace();
         }
@@ -152,7 +152,7 @@ public class XL extends Application {
     try {
       model.loadFile(file);
     } catch (IOException e) {
-      model.clear();
+      model.clear(); //If some IO exception happens, give the user a error popup.
       Alert alert = new Alert(Alert.AlertType.INFORMATION);
       alert.setHeaderText(null);
       alert.setTitle("IOException");
