@@ -4,23 +4,32 @@ package model;
 import expr.ErrorResult;
 import expr.Environment;
 import expr.ExprResult;
+import util.XLException;
 
 public class CircularCell implements CellEntry {
 
-    private String circular;
+    private CellEntry c;
 
-    public CircularCell(String circular) {
-        this.circular = circular;
+    public CircularCell(CellEntry c) {
+        this.c = c;
+
+    }
+
+    @Override public ExprResult value(Environment e) throws XLException {
+       if(c instanceof CellEntry){
+           try {
+               c.value(e);
+           } catch (StackOverflowError L){
+               throw new XLException("Circular reference");
+           }
+       }
+       return c.value(e);
 
     }
 
-    @Override public ExprResult value(Environment e) throws CircularError {
-       return new ErrorResult(circular);
-
-    }
 
     @Override
     public String toString() {
-        return circular;
+        return "Circular";
     }
 }

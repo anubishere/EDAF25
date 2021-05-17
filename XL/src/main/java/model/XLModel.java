@@ -43,7 +43,7 @@ public class XLModel implements ObservableModel, Environment {
 
   private boolean checkIfCircular(CellEntry newCell, CellAddress address) throws IOException {
     CellEntry previous = getEntry(address.toString());
-    cellMap.put(address, new CircularCell("Circular Value"));
+    cellMap.put(address, new CircularCell(newCell));
 
     try {
       newCell.value(this);
