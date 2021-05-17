@@ -8,28 +8,18 @@ import util.XLException;
 
 public class CircularCell implements CellEntry {
 
-    private CellEntry c;
+    private String circular;
 
-    public CircularCell(CellEntry c) {
-        this.c = c;
-
+    public CircularCell(String circular) {
+        this.circular = circular;
     }
 
-    @Override public ExprResult value(Environment e) throws XLException {
-       if(c instanceof CellEntry){
-           try {
-               c.value(e);
-           } catch (StackOverflowError L){
-               throw new XLException("Circular reference");
-           }
-       }
-       return c.value(e);
-
+    @Override public ExprResult value(Environment e) throws CircularError {
+        return new ErrorResult(circular);
     }
-
 
     @Override
-    public String toString() {
-        return "Circular";
+    public String toString(){
+        return circular;
     }
 }
