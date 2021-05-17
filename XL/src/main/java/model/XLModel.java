@@ -39,7 +39,6 @@ public class XLModel implements XLObserver, Environment {
         }catch(Exception e){
             cellMap.put(address, new CircularCell("##ERROR (Cell does not exist)"));
         }
-
     }
 
     /*
@@ -145,11 +144,8 @@ public class XLModel implements XLObserver, Environment {
     Used to determine the output of a given cell
      */
     public String getEntryOutput(CellEntry e) {
-        if (e instanceof CommentCell) {
-            return e.toString();
-        } else if (e instanceof EmptyCell) {
-            return e.toString();
-        } else if (e instanceof ExpressionCell) {
+
+        if (e instanceof ExpressionCell) {
             try {
                 ExprParser parser = new ExprParser();
                 Expr expr = parser.build(e.toString());
@@ -163,10 +159,9 @@ public class XLModel implements XLObserver, Environment {
             } catch (Exception b) {
                 return "##ERROR (" + b.getMessage() + ")";
             }
-        } else if (e instanceof CircularCell) {
+        } else {
             return e.toString();
         }
-        return "##ERROR (unknown error)";
     }
 
     //Updates the cellMap when a change occurs
