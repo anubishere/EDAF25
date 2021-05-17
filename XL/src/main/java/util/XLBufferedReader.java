@@ -10,8 +10,10 @@ import java.io.IOException;
 import java.util.Map;
 
 public class XLBufferedReader extends BufferedReader {
-  public XLBufferedReader(File file) throws FileNotFoundException {
+  XLModel model;
+  public XLBufferedReader(File file, XLModel model) throws FileNotFoundException {
     super(new FileReader(file));
+    this.model = model;
   }
 
   public void load(Map<CellAddress, CellEntry> map) throws IOException {
@@ -21,10 +23,8 @@ public class XLBufferedReader extends BufferedReader {
         String[] result = input.split("=");
         String cell = result[0];
         String value = result[1];
-        CellBuilder cb = new CellBuilder();
-        CellAddress cellAddress = cb.stringToAddress(cell);
-        CellEntry entry = cb.generateCellEntry(value);
-        map.put(cellAddress, entry);
+        CellAddress cellAddress = CellBuilder.stringToAddress(cell);
+        this.model.update(cellAddress, value);
       }
     } catch (Exception e) {
       throw new XLException(e.getMessage());

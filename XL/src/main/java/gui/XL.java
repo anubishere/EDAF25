@@ -153,16 +153,16 @@ public class XL extends Application {
   public void loadFile(File file) {
     try {
       model.loadFile(file);
-    } catch (IOException | StackOverflowError e) {
-      System.out.println("e.getMessage()");
+    } catch (IOException e) {
+
       model.clear();
       Alert alert = new Alert(Alert.AlertType.INFORMATION);
       alert.setHeaderText(null);
-      alert.setTitle("Circular Error");
-      alert.setContentText("Loaded XL file contains a circular Error.");
+      alert.setTitle("IOException");
+      alert.setContentText("?????");
       alert.showAndWait();
 
-      //e.printStackTrace();
+      e.printStackTrace();
     }
   }
 

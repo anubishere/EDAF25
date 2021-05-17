@@ -31,7 +31,7 @@ public class XLModel implements XLObserver, Environment {
     CellEntry newCe = CellBuilder.generateCellEntry(text);
     if (circularCheckRecursion(address.toString(), newCe)) {
       System.out.println("circular");
-      cellMap.put(address, new CircularCell("circular"));
+      cellMap.put(address, new CircularCell("##ERROR (circular)"));
     } else {
       System.out.println(address.toString());
       cellMap.put(address, newCe);
@@ -110,7 +110,7 @@ public class XLModel implements XLObserver, Environment {
   public void loadFile(File file) throws FileNotFoundException {
     this.clear();
     try {
-      XLBufferedReader reader = new XLBufferedReader(file);
+      XLBufferedReader reader = new XLBufferedReader(file, this);
       reader.load(this.cellMap);
     } catch (IOException e) {
       e.printStackTrace();
