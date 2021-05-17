@@ -33,7 +33,6 @@ public class XLModel implements XLObserver, Environment {
             System.out.println("circular");
             cellMap.put(address, new CircularCell("##ERROR (circular)"));
         } else {
-            System.out.println(address.toString());
             cellMap.put(address, newCe);
         }
     }
@@ -60,18 +59,16 @@ public class XLModel implements XLObserver, Environment {
     If String s contains an address, returns the address. It not, returns null.
      */
     public static String uglyHelperFunction(String s ){
+        String ret = "";
         for (int i = 0; i < s.length(); i++) { //Iterates over the string
             char currentChar = s.charAt(i);
             if ((int) currentChar > 64 && (int) currentChar < 75) { //If current character is a letter, check if it has 1 or 2 following numbers
-                String ret = "";
                 ret += currentChar;
                 if (s.charAt(i + 1) > 47 && s.charAt(i + 1) < 58) { //checks the first following number (A5 for example)
                     ret += s.charAt(i + 1); //Appends if it's a number, otherwise it's not an address and null will be returned.
-                    if (s.length() > i + 2) {
-                        if (s.charAt(i + 2) > 47 && s.charAt(i + 2) < 58) { //If it has another number, append it (for exampleA10), if not, return ret. (for example A9)
+                        if (s.length() > i + 2 && s.charAt(i + 2) > 47 && s.charAt(i + 2) < 58) { //If it has another number, append it (for exampleA10), if not, return ret. (for example A9)
                             ret += s.charAt(i + 2); //Appends if it's a number
                         }
-                    }
                     return ret;
                 }
             }
@@ -147,7 +144,6 @@ public class XLModel implements XLObserver, Environment {
         CellAddress addr = CellBuilder.stringToAddress(address);
         observers.forEach(obs -> obs.modelHasChanged(addr, newText));
     }
-
 
     /*
     Used to determine the output of a given cell
