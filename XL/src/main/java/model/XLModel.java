@@ -132,7 +132,7 @@ public class XLModel implements XLObserver, Environment {
   }
 
   @Override
-  public ExprResult value(String address) throws NullPointerException, NumberFormatException, XLException, CircularError {
+  public ExprResult value(String address) throws NullPointerException, NumberFormatException, XLException {
     CellAddress addr = CellBuilder.stringToAddress(address);
     if(!cellMap.containsKey(addr)){
       throw new XLException(String.format("Cell %s does not exist.", addr));
