@@ -130,20 +130,15 @@ public class XLModel implements XLObserver, Environment {
     /*
     Used to determine the output of a given cell
      */
-    public String getEntryOutput(CellEntry e) {
-
+    public String getEntryOutput(CellEntry e) throws XLException {
         if (e instanceof ExpressionCell) {
             try {
                 ExprParser parser = new ExprParser();
                 Expr expr = parser.build(e.toString());
                 ExprResult result = expr.value(this);
-                if (result instanceof ErrorResult) {
-                    return result.toString();
-                } else {
-                    return Double.toString(result.value()); //Returns the result of the expression
-                }
+                return result.toString(); //Returns the result of the expression
             } catch (Exception b) {
-                return "##ERROR (" + b.getMessage() + ")";
+                return e.value(this).toString();
             }
         } else {
             return e.toString();
@@ -164,7 +159,13 @@ public class XLModel implements XLObserver, Environment {
 
     //Updates the cellMap when a change occurs
     public void updateCellMap() {
-        cellMap.forEach((address, value) -> notifyObservers(address.toString(), getEntryOutput(value)));
+        cellMap.forEach((address, value) -> {
+            try {
+                notifyObservers(address.toString(), getEntryOutput(value));
+            } catch (XLException e) {
+                e.printStackTrace();
+            }
+        });
     }
 }
 

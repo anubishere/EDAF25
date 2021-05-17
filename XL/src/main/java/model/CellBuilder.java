@@ -2,17 +2,13 @@ package model;
 
 import expr.ErrorExpr;
 import expr.ExprParser;
-import util.XLException;
-import model.XLModel;
-
-import java.io.IOException;
 
 public class CellBuilder {
 
     /*
     Generates a cellEntry from text input. Infers the Cell type using the input.
      */
-    public static CellEntry generateCellEntry(String text) throws IOException {
+    public static CellEntry generateCellEntry(String text){
         if(text.equals("")){
             return new EmptyCell();
         }
@@ -24,7 +20,6 @@ public class CellBuilder {
                 ExprParser ex = new ExprParser();
                 return new ExpressionCell(ex.build(text));
             }catch(Exception e){ //Catches instances of expressions that are incalculable
-                System.out.println(e.getMessage());
                 try {
                     return new ExpressionCell(new ErrorExpr(e.getMessage())); //Incalculable expressions are return as Expressioncell with ErrorExpr in them.
                 } catch(Exception b) {
@@ -42,9 +37,6 @@ public class CellBuilder {
         if (s.length()>2) { //If the address contains a 2nd number, append it to row aswell.
             row+=s.charAt(2);
         }
-        return new CellAddress(col, Integer.parseInt(row.toString())); //Return the CellAddresss.
+        return new CellAddress(col, Integer.parseInt(row)); //Return the CellAddresss.
     }
-
-
-
 }
