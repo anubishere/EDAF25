@@ -30,7 +30,7 @@ public class XLModel implements XLObserver, Environment {
     public void update(CellAddress address, String text) throws IOException {
         CellEntry newCe = CellBuilder.generateCellEntry(text);
         try{
-            if (circularCheckRecursion(address.toString(), newCe)) {
+            if (circularCheckRecursion(address.toString(), newCe) ) {
                 System.out.println("circular");
                 cellMap.put(address, new CircularCell("##ERROR (circular)"));
             } else {
@@ -40,7 +40,6 @@ public class XLModel implements XLObserver, Environment {
             cellMap.put(address, new CircularCell("##ERROR (Cell does not exist)"));
         }
     }
-
     /*
     Recursive method used to check if a cell is circular.
      */
@@ -61,17 +60,18 @@ public class XLModel implements XLObserver, Environment {
     If String s contains an address, returns the address. It not, returns null.
      */
     public static String uglyHelperFunction(String s ){
-        String ret = "";
+        StringBuilder sb = new StringBuilder();
         for (int i = 0; i < s.length(); i++) { //Iterates over the string
             char currentChar = s.charAt(i);
             if ((int) currentChar > 64 && (int) currentChar < 75) { //If current character is a letter, check if it has 1 or 2 following numbers
-                ret += currentChar;
+                sb.append(currentChar);
                 if (s.charAt(i + 1) > 47 && s.charAt(i + 1) < 58) { //checks the first following number (A5 for example)
-                    ret += s.charAt(i + 1); //Appends if it's a number, otherwise it's not an address and null will be returned.
-                        if (s.length() > i + 2 && s.charAt(i + 2) > 47 && s.charAt(i + 2) < 58) { //If it has another number, append it (for exampleA10), if not, return ret. (for example A9)
-                            ret += s.charAt(i + 2); //Appends if it's a number
-                        }
-                    return ret;
+                    sb.append(s.charAt(i + 1)); //Appends if it's a number, otherwise it's not an address and null will be returned.
+
+                    if (s.length() > i + 2 && s.charAt(i + 2) > 47 && s.charAt(i + 2) < 58) { //If it has another number, append it (for exampleA10), if not, return ret. (for example A9)
+                        sb.append(s.charAt(i + 2)); //Appends if it's a number
+                    }
+                    return sb.toString();
                 }
             }
         }
@@ -111,14 +111,6 @@ public class XLModel implements XLObserver, Environment {
         cellMap.put(address, cell);
     }
 
-    public CellEntry getEntry(String address) throws XLException {
-        CellAddress addr = CellBuilder.stringToAddress(address);
-        if (!cellMap.containsKey(addr)) {
-            throw new XLException(String.format("Cell %s does not exist.", addr));
-        }
-        return cellMap.get(addr);
-    }
-
     @Override
     public ExprResult value(String address) throws NullPointerException, NumberFormatException, XLException {
         CellAddress addr = CellBuilder.stringToAddress(address);
@@ -126,6 +118,36 @@ public class XLModel implements XLObserver, Environment {
             throw new XLException(String.format("Cell %s does not exist.", addr));
         }
         return cellMap.get(addr).value(this);
+    }
+
+    public CellEntry getEntry(String address) throws XLException {
+        CellAddress addr = CellBuilder.stringToAddress(address);
+        if (!cellMap.containsKey(addr)) {
+            throw new XLException(String.format("Cell %s does not exist.", addr));
+        }
+        return cellMap.get(addr);
+    }
+    /*
+    Used to determine the output of a given cell
+     */
+    public String getEntryOutput(CellEntry e) {
+
+        if (e instanceof ExpressionCell) {
+            try {
+                ExprParser parser = new ExprParser();
+                Expr expr = parser.build(e.toString());
+                ExprResult result = expr.value(this);
+                if (result instanceof ErrorResult) {
+                    return result.toString();
+                } else {
+                    return Double.toString(result.value()); //Returns the result of the expression
+                }
+            } catch (Exception b) {
+                return "##ERROR (" + b.getMessage() + ")";
+            }
+        } else {
+            return e.toString();
+        }
     }
 
     @Override
@@ -138,30 +160,6 @@ public class XLModel implements XLObserver, Environment {
     public void notifyObservers(String address, String newText) {
         CellAddress addr = CellBuilder.stringToAddress(address);
         observers.forEach(obs -> obs.modelHasChanged(addr, newText));
-    }
-
-    /*
-    Used to determine the output of a given cell
-     */
-    public String getEntryOutput(CellEntry e) {
-
-        if (e instanceof ExpressionCell) {
-            try {
-                ExprParser parser = new ExprParser();
-                Expr expr = parser.build(e.toString());
-                ExprResult result = expr.value(this);
-                System.out.println(result.getClass() + " " + result);
-                if (result instanceof ErrorResult) {
-                    return result.toString();
-                } else {
-                    return Double.toString(result.value()); //Returns the result of the expression
-                }
-            } catch (Exception b) {
-                return "##ERROR (" + b.getMessage() + ")";
-            }
-        } else {
-            return e.toString();
-        }
     }
 
     //Updates the cellMap when a change occurs
