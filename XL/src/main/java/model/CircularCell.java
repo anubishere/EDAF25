@@ -1,10 +1,8 @@
 package model;
 
-
 import expr.ErrorResult;
 import expr.Environment;
 import expr.ExprResult;
-import util.XLException;
 
 public class CircularCell implements CellEntry {
 
@@ -15,7 +13,7 @@ public class CircularCell implements CellEntry {
     }
 
     @Override public ExprResult value(Environment e) {
-        return new ErrorResult(circular);
+        return new ErrorResult("Circular Error");
     }
 
     @Override

@@ -32,12 +32,12 @@ public class XLModel implements XLObserver, Environment {
         try{
             if (circularCheckRecursion(address.toString(), newCe) ) {
                 System.out.println("circular");
-                cellMap.put(address, new CircularCell("##ERROR (circular)"));
+                cellMap.put(address, new CircularCell("##ERROR (Circular Error)"));
             } else {
                 cellMap.put(address, newCe);
             }
         }catch(Exception e){
-            cellMap.put(address, new CircularCell("##ERROR (Cell does not exist)"));
+            cellMap.put(address, new CircularCell(e.getMessage()));
         }
     }
     /*
@@ -131,16 +131,11 @@ public class XLModel implements XLObserver, Environment {
     Used to determine the output of a given cell
      */
     public String getEntryOutput(CellEntry e) throws XLException {
-        if (e instanceof ExpressionCell) {
-            try {
-                ExprParser parser = new ExprParser();
-                Expr expr = parser.build(e.toString());
-                ExprResult result = expr.value(this);
-                return result.toString(); //Returns the result of the expression
-            } catch (Exception b) {
-                return e.value(this).toString();
-            }
-        } else {
+        try{
+            ExprParser parser = new ExprParser();
+            parser.build(e.toString());
+            return e.value(this).toString();
+        }catch(Exception ef){
             return e.toString();
         }
     }
