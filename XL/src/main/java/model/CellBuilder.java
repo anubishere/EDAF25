@@ -1,5 +1,6 @@
 package model;
 
+import expr.ErrorExpr;
 import expr.ExprParser;
 import util.XLException;
 import model.XLModel;
@@ -20,7 +21,13 @@ public class CellBuilder {
                 ExprParser ex = new ExprParser();
                 return new ExpressionCell(ex.build(text));
             }catch(Exception e){ //Catches instances of expressions that are incalculable
-                return new ErrorCell(e.getMessage());
+                System.out.println(e.getMessage());
+                try {
+                    return new ExpressionCell(new ErrorExpr(e.getMessage()));
+                } catch(Exception b) {
+                    System.out.println("detta är bevis ");
+                    return null;
+                }
             }
         }
     }

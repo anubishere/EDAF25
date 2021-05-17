@@ -88,24 +88,6 @@ public class XLModel implements XLObserver, Environment {
     return null;
   }
 
-  private boolean checkIfCircular(CellEntry newCell, CellAddress address) throws IOException {
-    CellEntry previous = getEntry(address.toString());
-    cellMap.put(address, new CircularCell("Circular Value"));
-
-    try {
-      newCell.value(this);
-    } catch (CircularError e) {
-      if (previous == null) {
-        cellMap.remove(address);
-      } else {
-        cellMap.put(address, previous);
-        return false;
-      }
-
-    }
-    return true;
-  }
-
 
   public void loadFile(File file) throws FileNotFoundException {
     this.clear();
@@ -137,15 +119,6 @@ public class XLModel implements XLObserver, Environment {
     updateCellMap();
   }
 
-  public String getCellValue(CellAddress address) {
-    return "";
-  }
-
-  public String getCellName(CellAddress address) {
-    return "";
-  }
-
-
   public void put(CellAddress address, CellEntry cell) {
     cellMap.put(address, cell);
   }
@@ -167,12 +140,6 @@ public class XLModel implements XLObserver, Environment {
     return cellMap.get(addr).value(this);
   }
 
-  public boolean cellExists(String address){
-    CellAddress addr = CellBuilder.stringToAddress(address);
-    return cellMap.get(addr) != null;
-
-  }
-
   @Override
   public void addObserver(XLModelObserver observer) {
     observers.add(observer);
@@ -187,8 +154,7 @@ public class XLModel implements XLObserver, Environment {
   /*Notifyar alla observers om ändringar som gjorts*/
   @Override
   public void notifyObservers(String address, String newText) {
-    CellBuilder cb = new CellBuilder();
-    CellAddress addr = cb.stringToAddress(address);
+    CellAddress addr = CellBuilder.stringToAddress(address);
     observers.forEach(obs -> obs.modelHasChanged(addr, newText));
   }
 
@@ -197,7 +163,7 @@ public class XLModel implements XLObserver, Environment {
       return e.toString();
     } else if (e instanceof EmptyCell) {
       return "";
-    } else if (e instanceof ExpressionCell) { //Vet inte om man kan använda interface här
+    } else if (e instanceof ExpressionCell) {
       try {
         ExprParser parser = new ExprParser();
         Expr expr = parser.build(e.toString()); //detta är nog fel,
@@ -210,14 +176,12 @@ public class XLModel implements XLObserver, Environment {
         }
       }
       catch (Exception b){
-        b.printStackTrace(); //placeholder
+        return "##ERROR (" + b.getMessage() + ")";
       }
     } else if (e instanceof CircularCell){
       return e.toString();
-    } else if(e instanceof ErrorCell){
-      return e.toString();
     }
-    return "Cell is not an instance of any of the above types";
+    return "##ERROR (unknown error)";
   }
 
   //Updates the cellMap when a change occurs

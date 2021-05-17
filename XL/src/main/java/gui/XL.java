@@ -70,7 +70,6 @@ public class XL extends Application {
       }
     }
 
-
     /* --------- EDITOR --------- */
     editor = new TextField();
     editor.setMinWidth(320);
@@ -80,15 +79,14 @@ public class XL extends Application {
       GridCell cell = currentCell.get();
       if (cell != null) {
         try {
+          System.out.println(editor.getText());
           model.update(cell.address, editor.getText());
           cellValueUpdated(cell.address.toString(), editor.getText());
         } catch (IOException e) {
           e.printStackTrace();
         }
       }
-
       model.updateCellMap();
-
     });
 
     /* ----------------- CURRENT CELL -----------------*/
@@ -154,14 +152,12 @@ public class XL extends Application {
     try {
       model.loadFile(file);
     } catch (IOException e) {
-
       model.clear();
       Alert alert = new Alert(Alert.AlertType.INFORMATION);
       alert.setHeaderText(null);
       alert.setTitle("IOException");
       alert.setContentText("?????");
       alert.showAndWait();
-
       e.printStackTrace();
     }
   }
