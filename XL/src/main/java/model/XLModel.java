@@ -28,22 +28,69 @@ public class XLModel implements ObservableModel, Environment {
    * @param text    the new code for the cell - can be raw text (starting with #) or an expression
    */
   public void update(CellAddress address, String text) throws IOException {
-    ExprParser ex = new ExprParser();
-    CellEntry ce = getEntry(address.toString());
-
-    if(ce instanceof ExpressionCell && !text.equals("")){
-      ExpressionCell newCell = new ExpressionCell(ex.build(text));
-      checkIfCircular(ce, address);
+    CellEntry newCe = CellBuilder.generateCellEntry(text);
+    if (circularCheckRecursion(address.toString(), newCe)) {
+      System.out.println("circular");
+      cellMap.put(address, new CircularCell("circular"));
     } else {
-      CellBuilder cb = new CellBuilder();
-      CellEntry cell = cb.generateCellEntry(text);
-      cellMap.put(address, cell);
+      System.out.println(address.toString());
+      cellMap.put(address, newCe);
     }
+  }
+
+  private boolean circularCheckRecursion(String targetAddr, CellEntry c) {
+    String expr = c.toString();
+
+    String[] splitted = expr.split("\\+-\\*/");
+    for(String s : splitted) {
+      if (s.contains(targetAddr)) {
+        return true;
+      } else if (uglyHelperFunction(s) != null){
+        return circularCheckRecursion(targetAddr, cellMap.get(CellBuilder.stringToAddress(s)));
+      } else {
+        return false;
+      }
+    }
+    return false;
+  }
+
+  public static String uglyHelperFunction(String s) { //Should return the address in the string
+    s.toUpperCase();
+    for(int i=0; i<s.length(); i++) {
+      char currentChar = s.charAt(i);
+      try {
+        if ((int) currentChar > 64 && (int) currentChar < 75) {
+          String ret = "";
+          ret += currentChar;
+          try {
+            if (s.charAt(i + 1) > 47 && s.charAt(i + 1) < 58) {
+              ret += s.charAt(i + 1);
+              if (s.length() > i + 2) {
+                if (s.charAt(i + 2) > 47 && s.charAt(i + 2) < 58) {
+                  ret += s.charAt(i + 2);
+                  return ret;
+                } else {
+                  return ret;
+                }
+              } else {
+                return ret;
+              }
+            }
+          } catch (IndexOutOfBoundsException e) {
+            System.out.println("false input");
+          }
+        }
+      }
+      catch(StringIndexOutOfBoundsException e) {
+        System.out.println("false input");
+      }
+    }
+    return null;
   }
 
   private boolean checkIfCircular(CellEntry newCell, CellAddress address) throws IOException {
     CellEntry previous = getEntry(address.toString());
-    cellMap.put(address, new CircularCell(newCell));
+    cellMap.put(address, new CircularCell("Circular Value"));
 
     try {
       newCell.value(this);
@@ -78,7 +125,7 @@ public class XLModel implements ObservableModel, Environment {
 
 
 //TODO efter notifyAll() behöver update() användas
-  
+
   public void clear() {
     cellMap.replaceAll((a, v) -> new EmptyCell());
     updateCellMap();
