@@ -58,7 +58,7 @@ public class ExprParser {
     if (token == StreamTokenizer.TT_EOF) {
       return e;
     } else {
-      throw new XLException("trailing garbage");
+      throw new XLException("Circular error");
     }
   }
 

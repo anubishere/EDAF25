@@ -2,6 +2,7 @@ package model;
 
 import expr.ExprParser;
 import util.XLException;
+import model.XLModel;
 
 import java.io.IOException;
 
@@ -25,14 +26,16 @@ public class CellBuilder {
     }
 
     public static CellAddress stringToAddress(String address) {
-        char firstChar = address.charAt(0);
-        int col = (int)firstChar - 65;
-        StringBuilder sb = new StringBuilder();
-        for (int i=1; i<address.length(); i++) {
-            sb.append(address.charAt(i));
+        String s = XLModel.uglyHelperFunction(address);
+        int col = (int)s.charAt(0)-65;
+        String row = "";
+        row += s.charAt(1);
+        if (s.length()>2) {
+            row+=s.charAt(2);
         }
-        return new CellAddress(col, Integer.parseInt(sb.toString()));
+        return new CellAddress(col, Integer.parseInt(row.toString()));
     }
+
 
 
 }

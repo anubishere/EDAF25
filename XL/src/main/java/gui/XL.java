@@ -7,10 +7,7 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.control.Tooltip;
+import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
@@ -156,8 +153,16 @@ public class XL extends Application {
   public void loadFile(File file) {
     try {
       model.loadFile(file);
-    } catch (IOException e) {
-      e.printStackTrace();
+    } catch (IOException | StackOverflowError e) {
+      System.out.println("e.getMessage()");
+      model.clear();
+      Alert alert = new Alert(Alert.AlertType.INFORMATION);
+      alert.setHeaderText(null);
+      alert.setTitle("Circular Error");
+      alert.setContentText("Loaded XL file contains a circular Error.");
+      alert.showAndWait();
+
+      //e.printStackTrace();
     }
   }
 
