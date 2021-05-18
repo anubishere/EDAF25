@@ -1,15 +1,8 @@
-package util;
-
-import model.CellAddress;
-import model.CellEntry;
-import model.EmptyCell;
+package model;
 
 import java.io.FileNotFoundException;
 import java.io.PrintStream;
-import java.util.HashMap;
 import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
 
 public class XLPrintStream extends PrintStream {
   public XLPrintStream(String fileName) throws FileNotFoundException { //"throws" might not be the correct way to do this

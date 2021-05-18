@@ -14,7 +14,6 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import model.*;
-import util.XLException;
 
 import java.io.File;
 import java.io.FileNotFoundException;

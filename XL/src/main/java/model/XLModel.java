@@ -1,11 +1,7 @@
 package model;
 
 import expr.*;
-import gui.GridCell;
-import javafx.scene.layout.GridPane;
-import util.XLBufferedReader;
 import util.XLException;
-import util.XLPrintStream;
 import expr.ExprParser;
 
 import java.io.File;
