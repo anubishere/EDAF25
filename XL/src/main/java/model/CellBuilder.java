@@ -20,11 +20,7 @@ public class CellBuilder {
                 ExprParser ex = new ExprParser();
                 return new ExpressionCell(ex.build(text));
             }catch(Exception e){ //Catches instances of expressions that are incalculable
-                try {
-                    return new ExpressionCell(new ErrorExpr(e.getMessage())); //Incalculable expressions are return as Expressioncell with ErrorExpr in them.
-                } catch(Exception b) {
-                    return null;
-                }
+                return new ExpressionCell(new ErrorExpr(e.getMessage())); //Incalculable expressions are return as Expressioncell with ErrorExpr in them.
             }
         }
     }

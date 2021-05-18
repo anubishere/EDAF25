@@ -66,7 +66,6 @@ public class XL extends Application {
         cells.put(address.toString(), cell);
         GridPane.setConstraints(cell, c + 1, r + 1);
         sheet.getChildren().add(cell);
-        model.put(address, new EmptyCell()); //Fyller modelmappen med tomma celler.
       }
     }
 
@@ -100,11 +99,7 @@ public class XL extends Application {
         editor.setDisable(false);
         // TODO: update editor text.
         // har gjort
-        try {
-          editor.setText(model.getEntry(newValue.address.toString()).toString());
-        } catch (XLException e) {
-          e.printStackTrace();
-        }
+        editor.setText(model.getEntry(newValue.address.toString()).toString());
         editor.requestFocus();
       } else {
         addressLbl.setText("?? =");

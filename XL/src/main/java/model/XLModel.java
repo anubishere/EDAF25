@@ -1,6 +1,8 @@
 package model;
 
 import expr.*;
+import gui.GridCell;
+import javafx.scene.layout.GridPane;
 import util.XLBufferedReader;
 import util.XLException;
 import util.XLPrintStream;
@@ -19,6 +21,13 @@ public class XLModel implements XLObserver, Environment {
     public XLModel() {
         cellMap = new HashMap<>();
         observers = new ArrayList<>();
+
+        for (int r = 0; r < XLModel.ROWS; ++r) {
+            for (int c = 0; c < XLModel.COLUMNS; ++c) {
+                CellAddress address = new CellAddress(c, r+1); //r+1 to compensate for the fact that rows start at 1.
+                put(address, new EmptyCell()); //Fyller modelmappen med tomma celler.
+            }
+        }
     }
 
     /**
@@ -29,16 +38,12 @@ public class XLModel implements XLObserver, Environment {
      */
     public void update(CellAddress address, String text) throws IOException {
         CellEntry newCe = CellBuilder.generateCellEntry(text);
-        try{
             if (circularCheckRecursion(address.toString(), newCe) ) {
-                System.out.println("circular");
                 cellMap.put(address, new CircularCell("##ERROR (Circular Error)"));
             } else {
                 cellMap.put(address, newCe);
             }
-        }catch(Exception e){
-            cellMap.put(address, new CircularCell(e.getMessage()));
-        }
+
     }
     /*
     Recursive method used to check if a cell is circular.
@@ -120,10 +125,13 @@ public class XLModel implements XLObserver, Environment {
         return cellMap.get(addr).value(this);
     }
 
-    public CellEntry getEntry(String address) throws XLException {
-        CellAddress addr = CellBuilder.stringToAddress(address);
-        if (!cellMap.containsKey(addr)) {
-            throw new XLException(String.format("Cell %s does not exist.", addr));
+    public CellEntry getEntry(String address) {
+        CellAddress addr = null;
+        try{
+            addr = CellBuilder.stringToAddress(address);
+        }
+        catch(Exception e){
+            e.printStackTrace();
         }
         return cellMap.get(addr);
     }
