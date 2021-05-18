@@ -1,7 +1,7 @@
 util/XLPrintStream.java
  util.XLPrintStream
-gui/XL.java
- gui.XL
+model/CircularCell.java
+ model.CircularCell
 expr/Mul.java
  expr.Mul
 model/EmptyCell.java
@@ -12,20 +12,18 @@ expr/Environment.java
  expr.Environment
 expr/ExprResult.java
  expr.ExprResult
-module-info.java
- module-info
+model/CellBuilder.java
+ model.CellBuilder
 model/ExpressionCell.java
  model.ExpressionCell
 expr/Add.java
  expr.Add
 gui/ColumnHeader.java
  gui.ColumnHeader
+model/XLModelObserver.java
+ model.XLModelObserver
 expr/Variable.java
  expr.Variable
-model/ObservableModel.java
- model.ObservableModel
-model/ErrorCell.java
- model.ErrorCell
 util/XLBufferedReader.java
  util.XLBufferedReader
 model/CellEntry.java
@@ -34,24 +32,22 @@ gui/GridCell.java
  gui.GridCell
 expr/Num.java
  expr.Num
-gui/menu/LoadMenuItem.java
- gui.menu.LoadMenuItem
+gui/CellSelectionObserver.java
+ gui.CellSelectionObserver
 expr/ValueResult.java
  expr.ValueResult
+model/XLObserver.java
+ model.XLObserver
 expr/ExprParser.java
  expr.ExprParser
-model/ModelObserver.java
- model.ModelObserver
 expr/BinaryExpr.java
  expr.BinaryExpr
 util/XLException.java
  util.XLException
-model/CircularError.java
- model.CircularError
 model/CommentCell.java
  model.CommentCell
-gui/menu/SaveMenuItem.java
- gui.menu.SaveMenuItem
+model/CellAddress.java
+ model.CellAddress
 expr/ErrorResult.java
  expr.ErrorResult
 expr/ErrorExpr.java
@@ -64,13 +60,13 @@ model/XLModel.java
  model.XLModel
 gui/RowHeader.java
  gui.RowHeader
-model/CellBuilder.java
- model.CellBuilder
-model/CellAddress.java
- model.CellAddress
-gui/CellSelectionObserver.java
- gui.CellSelectionObserver
+gui/XL.java
+ gui.XL
+module-info.java
+ module-info
+gui/menu/LoadMenuItem.java
+ gui.menu.LoadMenuItem
+gui/menu/SaveMenuItem.java
+ gui.menu.SaveMenuItem
 gui/menu/XLMenu.java
  gui.menu.XLMenu
-model/CircularCell.java
- model.CircularCell
