@@ -12,11 +12,20 @@ public class SaveMenuItem extends MenuItem {
     super("Save");
     setOnAction(event -> {
       FileChooser fileChooser = new FileChooser();
+
+      String userDirectoryString = System.getProperty("user.dir");
+      File userDirectory = new File(userDirectoryString);
+      if(!userDirectory.canRead()) {
+        userDirectory = new File("c:/");
+      }
+      fileChooser.setInitialDirectory(userDirectory);
+
       fileChooser.getExtensionFilters()
           .add(new FileChooser.ExtensionFilter("XL files (*.xl)", "*.xl"));
       File file = fileChooser.showSaveDialog(stage);
       if (file != null) {
         // TODO
+
         xl.saveFile(file);
         xl.clearEditor();
       }

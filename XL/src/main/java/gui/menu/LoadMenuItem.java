@@ -12,6 +12,14 @@ public class LoadMenuItem extends MenuItem {
     super("Load");
     setOnAction(event -> {
       FileChooser fileChooser = new FileChooser();
+
+      String userDirectoryString = System.getProperty("user.dir");
+      File userDirectory = new File(userDirectoryString);
+      if(!userDirectory.canRead()) {
+        userDirectory = new File("c:/");
+      }
+      fileChooser.setInitialDirectory(userDirectory);
+
       fileChooser.getExtensionFilters()
           .add(new FileChooser.ExtensionFilter("XL files (*.xl)", "*.xl"));
       File file = fileChooser.showOpenDialog(stage);

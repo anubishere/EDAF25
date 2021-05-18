@@ -3,7 +3,6 @@ package model;
 import expr.*;
 import util.XLException;
 import expr.ExprParser;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -34,17 +33,25 @@ public class XLModel implements XLObserver, Environment {
      */
     public void update(CellAddress address, String text) throws IOException {
         CellEntry newCe = CellBuilder.generateCellEntry(text);
-            if (circularCheckRecursion(address.toString(), newCe) ) {
+        try {
+            if (circularCheckRecursion(address.toString(), newCe)) {
                 cellMap.put(address, new CircularCell("##ERROR (Circular Error)"));
             } else {
                 cellMap.put(address, newCe);
             }
-
+        } catch (XLException e) { //Check for the out of bounds exception.
+            cellMap.put(address, new ExpressionCell(new ErrorExpr(e.getMessage())));
+        }
     }
     /*
     Recursive method used to check if a cell is circular.
      */
-    private boolean circularCheckRecursion(String targetAddr, CellEntry c) {
+    private boolean circularCheckRecursion(String targetAddr, CellEntry c) throws XLException {
+
+        if (c == null) {            //if c is null, the address must be out of bounds.
+            throw new XLException("Out of bounds");
+        }
+
         String expr = c.toString(); //gets all cell contents
         String[] splitted = expr.split("\\+-\\*/"); //splits the cell into their parts.
         for (String s : splitted) {
@@ -68,7 +75,6 @@ public class XLModel implements XLObserver, Environment {
                 sb.append(currentChar);
                 if (s.charAt(i + 1) > 47 && s.charAt(i + 1) < 58) { //checks the first following number (A5 for example)
                     sb.append(s.charAt(i + 1)); //Appends if it's a number, otherwise it's not an address and null will be returned.
-
                     if (s.length() > i + 2 && s.charAt(i + 2) > 47 && s.charAt(i + 2) < 58) { //If it has another number, append it (for exampleA10), if not, return ret. (for example A9)
                         sb.append(s.charAt(i + 2)); //Appends if it's a number
                     }

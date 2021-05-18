@@ -1,9 +1,6 @@
 package model;
 
-import expr.Environment;
-import expr.ErrorExpr;
-import expr.Expr;
-import expr.ExprResult;
+import expr.*;
 
 public class ExpressionCell implements CellEntry {
 

@@ -1,5 +1,6 @@
 package expr;
 
+import model.ExpressionCell;
 import util.XLException;
 
 class Variable implements Expr {
@@ -9,7 +10,8 @@ class Variable implements Expr {
     this.name = name;
   }
 
-  @Override public String toString() {
+  @Override
+  public String toString() {
     return name;
   }
 
